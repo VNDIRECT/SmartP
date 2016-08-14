@@ -1,0 +1,52 @@
+html body {
+  background-color: #FCFCFF;
+}
+
+/* Page header */
+.page-header.title {
+  margin: 10px 0 10px;
+}
+
+/* centered columns styles */
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+
+  /* reset the text-align */
+  text-align: left;
+
+  /* inline-block space fix */
+  margin-right: -4px;
+}
+
+/* List signals */
+.btn.buy-signal {
+  color: #82A335;
+  font-size: 20px;
+  background-color: #fff;
+  border: 1px solid #82A335;
+}
+
+.btn.buy-signal:hover {
+  color: #82A335;
+}
+/* Portfolio Statistics */
+.stat {
+  text-align: center;
+}
+.stat-name {
+  font-size: 18px;
+  color: #707070;
+}
+.stat-number {
+  font-size: 30px;
+}
+#container {
+  min-width: 300px;
+  max-width: 600px;
+  margin: 0 auto;
+}
