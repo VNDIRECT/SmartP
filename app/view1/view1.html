@@ -10,7 +10,7 @@
   <!-- List signals -->
   <div class="col-md-6 list-signals">
     <h3>Cơ hội đầu tư</h3>
-    <button type="button" class="btn buy-signal">VND</button>
+    <button type="button" class="btn buy-signal" ng-click="compute_smartP()">VND</button>
   </div>
 
   <!-- Portfolio -->
@@ -112,7 +112,7 @@
         </div>
 
         <div class="stat-number">
-          0.79
+          {{risk}}
         </div>
       </div>
     </div>
