@@ -23,17 +23,6 @@ html body {
   margin-right: -4px;
 }
 
-/* List signals */
-.btn.buy-signal {
-  color: #82A335;
-  font-size: 20px;
-  background-color: #fff;
-  border: 1px solid #82A335;
-}
-
-.btn.buy-signal:hover {
-  color: #82A335;
-}
 /* Portfolio Statistics */
 .stat {
   text-align: center;
@@ -44,9 +33,4 @@ html body {
 }
 .stat-number {
   font-size: 30px;
-}
-#container {
-  min-width: 300px;
-  max-width: 600px;
-  margin: 0 auto;
 }

@@ -3,145 +3,111 @@
   <div class="page-header title">
     <h2>
       Smart-P
-      <small>Công cụ tối ưu danh mục của bạn</small>
+      <small>Công cụ tối ưu danh mục đầu tư</small>
     </h2>
-  </div>
-
-  <!-- List signals -->
-  <div class="col-md-6 list-signals">
-    <h3>Cơ hội đầu tư</h3>
-    <button type="button" class="btn buy-signal">VND</button>
   </div>
 
   <!-- Portfolio -->
   <div class="col-md-6">
     <h3>Danh mục của bạn</h3>
 
-    <!-- Treemap -->
-    <div class="portfolio-chart" id="container">
-      <script type="text/javascript">
-      $(function () {
-        $('#container').highcharts({
-          series: [{
-              type: "treemap",
-              layoutAlgorithm: 'stripes',
-              alternateStartingDirection: true,
-              levels: [{
-                  level: 1,
-                  layoutAlgorithm: 'sliceAndDice',
-                  dataLabels: {
-                      enabled: true,
-                      align: 'left',
-                      verticalAlign: 'top',
-                      style: {
-                          fontSize: '15px',
-                          fontWeight: 'bold'
-                      }
-                  }
-              }],
-              data: [{
-                  id: 'A',
-                  name: 'Apples',
-                  color: "#EC2500"
-              }, {
-                  id: 'B',
-                  name: 'Bananas',
-                  color: "#ECE100"
-              }, {
-                  id: 'O',
-                  name: 'Oranges',
-                  color: '#EC9800'
-              }, {
-                  name: 'Anne',
-                  parent: 'A',
-                  value: 5
-              }, {
-                  name: 'Rick',
-                  parent: 'A',
-                  value: 3
-              }, {
-                  name: 'Peter',
-                  parent: 'A',
-                  value: 4
-              }, {
-                  name: 'Anne',
-                  parent: 'B',
-                  value: 4
-              }, {
-                  name: 'Rick',
-                  parent: 'B',
-                  value: 10
-              }, {
-                  name: 'Peter',
-                  parent: 'B',
-                  value: 1
-              }, {
-                  name: 'Anne',
-                  parent: 'O',
-                  value: 1
-              }, {
-                  name: 'Rick',
-                  parent: 'O',
-                  value: 3
-              }, {
-                  name: 'Peter',
-                  parent: 'O',
-                  value: 3
-              }, {
-                  name: 'Susanne',
-                  parent: 'Kiwi',
-                  value: 2,
-                  color: '#9EDE00'
-              }]
-          }],
-          title: {
-              text: 'Fruit consumption'
-          }
-      });
-    });
-      </script>
+    <!-- Form -->
+    <div class="description">
+      Nhập danh mục
     </div>
+    <div class="form-group">
+      <div class="col-md-5">
+        <input id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
+      </div>
+
+      <div class="col-md-5">
+        <input id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="">
+      </div>
+
+      <div class="col-md-2">
+        <button type="button" class="btn add-symbol">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Mã chứng khoán</th>
+          <th>Khối lượng</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>VND</td>
+          <td>500</td>
+          <td>
+            <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
+  <div class="col-md-6">
+    <h3>Kết quả</h3>
+
+    <div class="portfolio-stat col-md-12">
+      <div class="col-md-6">
+        <div class="stat">
+          <div class="stat-name">
+            Lợi nhuận kì vọng
+          </div>
+
+          <div class="stat-number">
+            15%
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="stat">
+          <div class="stat-name">
+            Chỉ số rủi ro
+          </div>
+
+          <div class="stat-number">
+            0.79
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="stat">
+          <div class="stat-name">
+            Biến động danh mục
+          </div>
+
+          <div class="stat-number">
+            155,755đ
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="stat">
+          <div class="stat-name">
+            Khoản lỗ lớn nhất
+          </div>
+
+          <div class="stat-number">
+            1,360,000đ
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- Ratio -->
-  <div class="portfolio-stat col-md-12">
-    <div class="col-md-4">
-      <div class="stat">
-        <div class="stat-name">
-          Chỉ số rủi ro
-        </div>
 
-        <div class="stat-number">
-          0.79
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="stat">
-        <div class="stat-name">
-          Biến động danh mục
-        </div>
-
-        <div class="stat-number">
-          155,755đ
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="stat">
-        <div class="stat-name">
-          Khoản lỗ lớn nhất
-        </div>
-
-        <div class="stat-number">
-          1,360,000đ
-        </div>
-      </div>
-    </div>
-
-  </div>
 
 
 </div>
