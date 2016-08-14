@@ -3,3 +3,11 @@
   Showing of 'interpolate' filter:
   {{ 'Current version is v%VERSION%.' | interpolate }}
 </p>
+
+<label>VND</label>
+<input ng-model='vnd_quantity'></input>
+<label>SSI</label>
+<input ng-model='ssi_quantity'></input>
+<div>The risk is {{risk}} and expected a return of {{expectedReturn}} percent.</div>
+<button ng-click='compute_smartP()'>Help! SmartP</button>
+
