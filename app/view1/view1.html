@@ -1,1 +1,147 @@
-<p>This is the partial for view 1.</p>
+<div class="container">
+  <!-- Header -->
+  <div class="page-header title">
+    <h2>
+      Smart-P
+      <small>Công cụ tối ưu danh mục của bạn</small>
+    </h2>
+  </div>
+
+  <!-- List signals -->
+  <div class="col-md-6 list-signals">
+    <h3>Cơ hội đầu tư</h3>
+    <button type="button" class="btn buy-signal">VND</button>
+  </div>
+
+  <!-- Portfolio -->
+  <div class="col-md-6">
+    <h3>Danh mục của bạn</h3>
+
+    <!-- Treemap -->
+    <div class="portfolio-chart" id="container">
+      <script type="text/javascript">
+      $(function () {
+        $('#container').highcharts({
+          series: [{
+              type: "treemap",
+              layoutAlgorithm: 'stripes',
+              alternateStartingDirection: true,
+              levels: [{
+                  level: 1,
+                  layoutAlgorithm: 'sliceAndDice',
+                  dataLabels: {
+                      enabled: true,
+                      align: 'left',
+                      verticalAlign: 'top',
+                      style: {
+                          fontSize: '15px',
+                          fontWeight: 'bold'
+                      }
+                  }
+              }],
+              data: [{
+                  id: 'A',
+                  name: 'Apples',
+                  color: "#EC2500"
+              }, {
+                  id: 'B',
+                  name: 'Bananas',
+                  color: "#ECE100"
+              }, {
+                  id: 'O',
+                  name: 'Oranges',
+                  color: '#EC9800'
+              }, {
+                  name: 'Anne',
+                  parent: 'A',
+                  value: 5
+              }, {
+                  name: 'Rick',
+                  parent: 'A',
+                  value: 3
+              }, {
+                  name: 'Peter',
+                  parent: 'A',
+                  value: 4
+              }, {
+                  name: 'Anne',
+                  parent: 'B',
+                  value: 4
+              }, {
+                  name: 'Rick',
+                  parent: 'B',
+                  value: 10
+              }, {
+                  name: 'Peter',
+                  parent: 'B',
+                  value: 1
+              }, {
+                  name: 'Anne',
+                  parent: 'O',
+                  value: 1
+              }, {
+                  name: 'Rick',
+                  parent: 'O',
+                  value: 3
+              }, {
+                  name: 'Peter',
+                  parent: 'O',
+                  value: 3
+              }, {
+                  name: 'Susanne',
+                  parent: 'Kiwi',
+                  value: 2,
+                  color: '#9EDE00'
+              }]
+          }],
+          title: {
+              text: 'Fruit consumption'
+          }
+      });
+    });
+      </script>
+    </div>
+  </div>
+
+  <!-- Ratio -->
+  <div class="portfolio-stat col-md-12">
+    <div class="col-md-4">
+      <div class="stat">
+        <div class="stat-name">
+          Chỉ số rủi ro
+        </div>
+
+        <div class="stat-number">
+          0.79
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="stat">
+        <div class="stat-name">
+          Biến động danh mục
+        </div>
+
+        <div class="stat-number">
+          155,755đ
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="stat">
+        <div class="stat-name">
+          Khoản lỗ lớn nhất
+        </div>
+
+        <div class="stat-number">
+          1,360,000đ
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
