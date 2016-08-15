@@ -16,7 +16,7 @@ angular.module('myApp.view1', ['ngRoute'])
     If symbol exists when added, increase the current quantity instead
     */
     function create_portfolio() {
-        var init_data =
+        var default_data =
             [
                 {symbol: 'VND', quantity: 200},
                 {symbol: 'SSI', quantity: 100},
@@ -51,10 +51,11 @@ angular.module('myApp.view1', ['ngRoute'])
             /**
             Load the init data into data
             */
-            init: function() {
+            init: function(init_data) {
+                var data = init_data || default_data;
                 this.data.length = 0;
-                for(var i = 0; i < init_data.length; i++) {
-                    this.add(init_data[i].symbol, init_data[i].quantity);
+                for(var i = 0; i < data.length; i++) {
+                    this.add(data[i].symbol, data[i].quantity);
                 }
                 return this;
             }
@@ -90,13 +91,27 @@ angular.module('myApp.view1', ['ngRoute'])
                 return portfolio_store[id];
             },
 
+            /**
+            Add a new portfolio to list
+            {
+                id:
+                name:
+                data: {
+
+                }
+            }
+            */
+            add: function(portfolio) {
+                portfolio_store[portfolio.id] = create_portfolio().init(portfolio.data);
+            }
         }
     }
 
     var portfolio_store = create_portfolio_store($scope.portfolio_list);
     $scope.portfolio = portfolio_store.get($scope.selectedP);
 
-    $scope.add_symbol = function() {
+    $scope.add_symbol = function(symbol, quantity) {
+        console.log('Adding symbol', symbol, quantity);
         // simple validation to avoid empty string symbol input
         if($scope.pending_symbol.length > 0) {
             $scope.portfolio.add($scope.pending_symbol, $scope.pending_quantity);
@@ -112,8 +127,20 @@ angular.module('myApp.view1', ['ngRoute'])
     };
 
     $scope.reset = function() {
-        $scope.portfolio.init();
-        compute_smartP();
+        portfolio_store.add({
+            id: "0003",
+            name: "My Portfolio",
+            data: [
+                {symbol: "VNM", quantity: 100}
+            ]
+        });
+        $scope.portfolio_list.push({
+            id: "0003",
+            name: "My Portfolio"
+        })
+        $scope.selectedP = "0003";
+        // $scope.portfolio.init();
+        // compute_smartP();
     };
 
     function compute_smartP() {
