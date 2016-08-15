@@ -27,6 +27,7 @@ html body {
   /* inline-block space fix */
   margin-right: -4px;
 }
+
 /* Portfolio details */
 .portfolio-input {
   margin-bottom: 45px;
@@ -66,17 +67,30 @@ html body {
 
 /* Ratios */
 h3.title-ratio{
-  padding-left: 29px;
+  /*padding-left: 15px;*/
+}
+
+.col-md-12.underline {
+  border-bottom: solid thin #eeeeee;
+  padding-left: 0;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.stat.col-md-6 {
+  padding-left: 0;
 }
 
 .stat {
   text-align: left;
-
 }
+
 .stat-name {
-  font-size: 18px;
+  font-size: 16px;
   color: #707070;
 }
+
 .stat-number {
   font-size: 30px;
+  font-weight: bold;
 }
