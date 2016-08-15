@@ -46,10 +46,11 @@ angular.module('myApp.engineP', [])
                   method: 'GET',
                   url: url
                 }).then(function successCallback(response) {
-                    callback({
-                        risk: _format_number(response.data.risk),
-                        expectedReturn: _format_number(response.data.expectedReturn)
-                    });
+                    callback(response.data);
+                    // callback({
+                    //     risk: _format_number(response.data.risk),
+                    //     expectedReturn: _format_number(response.data.expectedReturn)
+                    // });
                   }, function errorCallback(response) {
                     console.log('Error ', response);
                     // called asynchronously if an error occurs

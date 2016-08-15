@@ -124,7 +124,7 @@
         </div>
 
         <div class="stat-number">
-          15%
+          {{indicator.expectedReturn * 100 | number:2}}%
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
         </div>
 
         <div class="stat-number">
-          0.79
+          {{indicator.beta | number:3}}
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@
         </div>
 
         <div class="stat-number">
-          155,755đ
+          {{indicator.valueAtRisk | number:0}} đ
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
         </div>
 
         <div class="stat-number">
-          1,360,000đ
+          {{indicator.maxDrawDown | number:0}} đ
         </div>
       </div>
     </div>

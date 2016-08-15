@@ -10,7 +10,6 @@ angular.module('myApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
-    $scope.symbol = $scope.symbol || 'VND';
 
     /**
     Handle portfolio logic:
@@ -101,11 +100,9 @@ angular.module('myApp.view1', ['ngRoute'])
         // );
 
 
-        // engineP.compute({VND: $scope.vnd_quantity || 100, SSI: $scope.ssi_quantity || 200}, function(result) {
         engineP.compute($scope.portfolio.get_json(), function(result) {
             console.log('Computing process has been done with result: ', result);
-            $scope.risk = result.risk;
-            $scope.expectedReturn = result.expectedReturn;
+            $scope.indicator = result;
         }, function errorCallback(error) {
             console.log('error while compute smartP', error);
         });
