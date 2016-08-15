@@ -12,6 +12,18 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
 
     $scope.is_logged_in = false;
+    $scope.is_loading = false;
+
+    function init_default_indicator() {
+        $scope.indicator = {
+            beta: 0,
+            expectedReturn: 0,
+            maxDrawDown: 0,
+            valueAtRisk:0
+        }
+    }
+
+    init_default_indicator();
 
     /**
     Handle portfolio logic:
@@ -65,11 +77,15 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     };
 
-    $scope.portfolio_list = [
-        {id: '0001', name: 'Danh mục ảo 1'},
-        {id: '0002', name: 'Danh mục ảo 2'},
-    ];
-    $scope.selectedP = $scope.portfolio_list[0].id;
+    function init_portfolio_list() {
+        $scope.portfolio_list = [
+            {id: '0001', name: 'Danh mục ảo 1'},
+            {id: '0002', name: 'Danh mục ảo 2'},
+        ];
+        $scope.selectedP = $scope.portfolio_list[0].id;
+    }
+
+    init_portfolio_list();
 
     $scope.$watch('selectedP', function() {
         console.log('Update select', $scope.selectedP);
@@ -184,8 +200,8 @@ angular.module('myApp.view1', ['ngRoute'])
     /**
     */
     $scope.logout = function() {
-        $scope.portfolio_list = [];
-        $scope.portfolio = {};
+        init_portfolio_list();
+        $scope.portfolio.init();
         $scope.is_logged_in = false;
     }
 
@@ -193,9 +209,12 @@ angular.module('myApp.view1', ['ngRoute'])
     Call engineP and update all indicators
     */
     function compute_smartP() {
+        $scope.is_loading = true;
+        init_default_indicator();
         engineP.compute($scope.portfolio.get_json(), function(result) {
             console.log('Computing process has been done with result: ', result);
             $scope.indicator = result;
+            $scope.is_loading = false;
         }, function errorCallback(error) {
             console.log('error while compute smartP', error);
         });
