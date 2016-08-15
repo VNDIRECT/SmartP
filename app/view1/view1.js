@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+This view requires a highchart
+*/
+
 angular.module('myApp.view1', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
@@ -14,7 +18,7 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.is_logged_in = false;
     $scope.is_loading = false;
 
-    function init_default_indicator() {
+    function reset_indicator_to_default() {
         $scope.indicator = {
             beta: 0,
             expectedReturn: 0,
@@ -23,7 +27,7 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     }
 
-    init_default_indicator();
+    reset_indicator_to_default();
 
     /**
     Handle portfolio logic:
@@ -210,7 +214,7 @@ angular.module('myApp.view1', ['ngRoute'])
     */
     function compute_smartP() {
         $scope.is_loading = true;
-        init_default_indicator();
+        reset_indicator_to_default();
         engineP.compute($scope.portfolio.get_json(), function(result) {
             console.log('Computing process has been done with result: ', result);
             $scope.indicator = result;
