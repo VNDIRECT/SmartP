@@ -148,6 +148,7 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.retrieve_account = function(username, password) {
         console.log('Loggin in');
         tradeapi.login(username, password)
+        // TODO: this is promise but still callback nested
         .then(
             function(data) {
                 console.log('Logged in success', data);
@@ -156,6 +157,16 @@ angular.module('myApp.view1', ['ngRoute'])
                     for(var i = 0; i < data.accounts.length; i++) {
                         tradeapi.retrieve_portfolio(data.accounts[i].accountNumber).then(function(data) {
                             console.log('Portfolio List', data);
+                            // adding portfolio
+                            $scope.portfolio_list.push({
+                                id: data.accountNumber,
+                                name: data.accountNumber
+                            });
+                            portfolio_store.add({
+                                id: data.accountNumber,
+                                name: data.accountNumber,
+                                data: data.stocks
+                            });
                         });
                     }
                 });
@@ -166,22 +177,10 @@ angular.module('myApp.view1', ['ngRoute'])
         );
     }
 
+    /**
+    Call engineP and update all indicators
+    */
     function compute_smartP() {
-    // $scope.compute_smartP = function() {
-        // tradeapi.login('thangnt.nhtck47', 'vnds@1234')
-        // .then(
-        //     function(data) {
-        //         console.log('Logged in success', data);
-        //         tradeapi.retrieve_customer().then(function(data) {
-        //             console.log('Customer info', data);
-        //         })
-        //     },
-        //     function(message) {
-        //         console.log('Loggin error', message);
-        //     }
-        // );
-
-
         engineP.compute($scope.portfolio.get_json(), function(result) {
             console.log('Computing process has been done with result: ', result);
             $scope.indicator = result;
