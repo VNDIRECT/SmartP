@@ -30,7 +30,7 @@
       <!-- Display name when logged in -->
       <div ng-show="is_logged_in">
         <div class="user-detail">
-          Xin chào, {{full_name}}
+          Xin chào, {{full_name}} <i class="fa fa-sign-out" ng-click="logout()"></i>
         </div>
         <!-- <div class="col-md-3">
           <button type="button" class="btn btn-add" ng-click="logout()">
