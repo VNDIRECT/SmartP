@@ -11,6 +11,8 @@ angular.module('myApp.view1', ['ngRoute'])
 
 .controller('View1Ctrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
 
+    $scope.is_logged_in = false;
+
     /**
     Handle portfolio logic:
     If symbol exists when added, increase the current quantity instead
@@ -152,8 +154,10 @@ angular.module('myApp.view1', ['ngRoute'])
         .then(
             function(data) {
                 console.log('Logged in success', data);
+                $scope.is_logged_in = true;
                 tradeapi.retrieve_customer().then(function(data) {
                     console.log('Customer info', data);
+                    $scope.full_name = data.customerName;
                     for(var i = 0; i < data.accounts.length; i++) {
                         tradeapi.retrieve_portfolio(data.accounts[i].accountNumber).then(function(data) {
                             console.log('Portfolio List', data);
