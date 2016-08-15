@@ -9,9 +9,23 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['$scope', 'engineP', function($scope, engineP) {
+.controller('View1Ctrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
     $scope.symbol = $scope.symbol || 'VND';
     $scope.compute_smartP = function() {
+        tradeapi.login('thangnt.nhtck47', 'vnds@1234')
+        .then(
+            function(data) {
+                console.log('Logged in success', data);
+                tradeapi.retrieve_customer().then(function(data) {
+                    console.log('Customer info', data);
+                })
+            },
+            function(message) {
+                console.log('Loggin error', message);
+            }
+        );
+
+        console.log('Logging in...');
         engineP.compute({VND: $scope.vnd_quantity || 100, SSI: $scope.ssi_quantity || 200}, function(result) {
             console.log('Computing process has been done with result: ', result);
             $scope.risk = result.risk;
