@@ -29,7 +29,14 @@
 
       <!-- Display name when logged in -->
       <div ng-show="is_logged_in">
-        Hello, {{full_name}}
+        <div class="col-md-6">
+          Hello, {{full_name}}
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-add" ng-click="logout()">
+            Đăng xuất
+          </button>
+      </div>
       </div>
 
     </div>

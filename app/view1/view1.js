@@ -182,6 +182,12 @@ angular.module('myApp.view1', ['ngRoute'])
     }
 
     /**
+    */
+    $scope.logout = function() {
+        console.log('Logout');
+    }
+
+    /**
     Call engineP and update all indicators
     */
     function compute_smartP() {
