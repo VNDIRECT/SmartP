@@ -35,6 +35,20 @@ angular.module('myApp.view1', ['ngRoute'])
                 this.data.push({symbol: symbol, quantity: quantity});
             },
 
+            remove: function(index) {
+                this.data.splice(index, 1);
+            },
+
+            /**
+            Return the current portfolio in a nice JSON format
+            */
+            get_json: function() {
+                return this.data.reduce(function(o, cur, next) {
+                    o[cur.symbol] = cur.quantity;
+                    return o;
+                }, {});
+            },
+
             /**
             Load the init data into data
             */
@@ -58,28 +72,37 @@ angular.module('myApp.view1', ['ngRoute'])
             $scope.pending_quantity = 0;
             $scope.pending_symbol =  '';
         }
-    }
+        compute_smartP();
+    };
+
+    $scope.remove_symbol = function(index) {
+        $scope.portfolio.remove(index);
+        compute_smartP();
+    };
 
     $scope.reset = function() {
         $scope.portfolio.init();
-    }
+        compute_smartP();
+    };
 
-    $scope.compute_smartP = function() {
-        tradeapi.login('thangnt.nhtck47', 'vnds@1234')
-        .then(
-            function(data) {
-                console.log('Logged in success', data);
-                tradeapi.retrieve_customer().then(function(data) {
-                    console.log('Customer info', data);
-                })
-            },
-            function(message) {
-                console.log('Loggin error', message);
-            }
-        );
+    function compute_smartP() {
+    // $scope.compute_smartP = function() {
+        // tradeapi.login('thangnt.nhtck47', 'vnds@1234')
+        // .then(
+        //     function(data) {
+        //         console.log('Logged in success', data);
+        //         tradeapi.retrieve_customer().then(function(data) {
+        //             console.log('Customer info', data);
+        //         })
+        //     },
+        //     function(message) {
+        //         console.log('Loggin error', message);
+        //     }
+        // );
 
 
-        engineP.compute({VND: $scope.vnd_quantity || 100, SSI: $scope.ssi_quantity || 200}, function(result) {
+        // engineP.compute({VND: $scope.vnd_quantity || 100, SSI: $scope.ssi_quantity || 200}, function(result) {
+        engineP.compute($scope.portfolio.get_json(), function(result) {
             console.log('Computing process has been done with result: ', result);
             $scope.risk = result.risk;
             $scope.expectedReturn = result.expectedReturn;

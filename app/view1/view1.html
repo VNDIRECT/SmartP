@@ -45,17 +45,17 @@
           <th>Mã chứng khoán</th>
           <th>Khối lượng</th>
           <th>Tỷ trọng</th>
-          <th></th>
+          <th>{{love}}</th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="row in portfolio.data">
-          <td>1</td>
+          <td>{{$index}}</td>
           <td>{{row.symbol}}</td>
           <td>{{row.quantity}}</td>
           <td>{{row.percent}}</td>
           <td>
-            <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
+            <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
           </td>
         </tr>
       </tbody>
