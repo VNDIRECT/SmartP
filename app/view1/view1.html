@@ -29,14 +29,14 @@
 
       <!-- Display name when logged in -->
       <div ng-show="is_logged_in">
-        <div class="col-md-6">
-          Hello, {{full_name}}
+        <div class="user-detail">
+          Xin chào, {{full_name}}
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
           <button type="button" class="btn btn-add" ng-click="logout()">
             Đăng xuất
           </button>
-      </div>
+        </div> -->
       </div>
 
     </div>
@@ -50,10 +50,10 @@
 
     <!-- Money status  -->
     <div class="money">
-      <div class="money-title col-md-6">Số tiền đang có:</div>
+      <div class="money-title col-md-6">Tiền mặt:</div>
       <div class="money-status col-md-6">13,000,000đ</div>
     </div>
-    <!-- Table symbols -->
+    <!-- Table portfolio -->
     <table class="table table-condensed">
       <thead>
         <tr>
@@ -77,10 +77,18 @@
       </tbody>
     </table>
 
+    <div class="toggle switch-button">
+      Tối ưu danh mục
+      <label class="switch">
+        <input type="checkbox">
+        <div class="slider round"></div>
+      </label>
+    </div>
+
     <!-- Input portfolio -->
     <div class="portfolio-input">
       <div class="description">
-        Nhập các mã CK trong danh mục của bạn:
+        Nhập các mã CK trong danh mục:
       </div>
       <!-- <div class="toggle col-md-6">
         <span>Chế độ mua thử CK</span>
