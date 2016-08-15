@@ -111,6 +111,8 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.portfolio = portfolio_store.get($scope.selectedP);
 
     $scope.add_symbol = function(symbol, quantity) {
+        // TODO: move add_symbol into a function itself?
+        // this might help avoid leaking $scope variable
         console.log('Adding symbol', symbol, quantity);
         // simple validation to avoid empty string symbol input
         if($scope.pending_symbol.length > 0) {
@@ -142,6 +144,27 @@ angular.module('myApp.view1', ['ngRoute'])
         // $scope.portfolio.init();
         // compute_smartP();
     };
+
+    $scope.retrieve_account = function(username, password) {
+        console.log('Loggin in');
+        tradeapi.login(username, password)
+        .then(
+            function(data) {
+                console.log('Logged in success', data);
+                tradeapi.retrieve_customer().then(function(data) {
+                    console.log('Customer info', data);
+                    for(var i = 0; i < data.accounts.length; i++) {
+                        tradeapi.retrieve_portfolio(data.accounts[i].accountNumber).then(function(data) {
+                            console.log('Portfolio List', data);
+                        });
+                    }
+                });
+            },
+            function(message) {
+                console.log('Loggin error', message);
+            }
+        );
+    }
 
     function compute_smartP() {
     // $scope.compute_smartP = function() {

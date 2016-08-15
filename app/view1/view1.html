@@ -12,15 +12,15 @@
     <div class="col-md-6 login-form">
       <div class="form-group">
         <div class="col-md-4">
-          <input id="inputAccount" class="form-control" placeholder="Tài khoản" required="" autofocus="">
+          <input id="inputAccount" class="form-control" placeholder="Tài khoản" required="" autofocus="" ng-model="username">
         </div>
 
         <div class="col-md-4">
-          <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="" autofocus="">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="" autofocus="" ng-model="password">
         </div>
 
         <div class="col-md-3">
-          <button type="button" class="btn btn-add">
+          <button type="button" class="btn btn-add" ng-click="retrieve_account(username, password)">
             Đăng nhập
           </button>
         </div>

@@ -9,6 +9,7 @@ angular.module('myApp.tradeapi', [])
 .factory('tradeapi', ['$http', '$q', function($http, $q) {
     var AUTH_URL = 'https://auth-api.vndirect.com.vn/auth';
     var CUSOMTER_URL = 'https://trade-api.vndirect.com.vn/customer';
+    var PORTFOLIO_URL = 'https://trade-api.vndirect.com.vn/accounts/<accountNo>/portfolio';
 
     var token = null;
 
@@ -41,6 +42,28 @@ angular.module('myApp.tradeapi', [])
                 $http({
                     method: 'GET',
                     url: CUSOMTER_URL,
+                    headers: {
+                        'X-AUTH-TOKEN': token
+                    }
+                })
+                .then(function(response) {
+                    deferred.resolve(response.data);
+                }, function(response) {
+                    deferred.reject(response.data.message);
+                });
+                return deferred.promise;
+            }
+            else{
+                throw 'You are not logged in';
+            }
+        },
+
+        retrieve_portfolio: function(accountNo) {
+            var deferred = $q.defer();
+            if(token) {
+                $http({
+                    method: 'GET',
+                    url: PORTFOLIO_URL.replace('<accountNo>', accountNo),
                     headers: {
                         'X-AUTH-TOKEN': token
                     }
