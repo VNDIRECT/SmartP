@@ -68,7 +68,7 @@
         <tr ng-repeat="row in portfolio.data">
           <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
-          <td>{{row.quantity}}</td>
+          <td>{{row.quantity | number}}</td>
           <td>{{row.percent}}</td>
           <td>
             <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
