@@ -7,6 +7,11 @@ html body {
   margin: 10px 0 10px;
 }
 
+/* Login form */
+.col-md-6.login-form {
+  padding-top: 20px;
+}
+
 /* centered columns styles */
 .row-centered {
   text-align: center;
@@ -25,7 +30,7 @@ html body {
 
 /* Portfolio Statistics */
 .stat {
-  text-align: center;
+  text-align: left;
 }
 .stat-name {
   font-size: 18px;
@@ -35,7 +40,10 @@ html body {
   font-size: 30px;
 }
 
-.description {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.portfolio-input {
+  margin-bottom: 45px;
+}
+
+.btn.btn-add {
+  width: 100%;
 }

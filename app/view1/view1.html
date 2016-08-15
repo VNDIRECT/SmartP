@@ -1,15 +1,41 @@
 <div class="container">
   <!-- Header -->
-  <div class="page-header title">
-    <h2>
-      Smart-P
-      <small>Công cụ tối ưu danh mục đầu tư</small>
-    </h2>
+  <div class="page-header title col-md-12">
+    <div class="col-md-6">
+      <h2>
+        Smart-P
+        <small>Tối ưu danh mục đầu tư</small>
+      </h2>
+    </div>
+
+    <!-- Login -->
+    <div class="col-md-6 login-form">
+      <div class="form-group">
+        <div class="col-md-4">
+          <input id="inputAccount" class="form-control" placeholder="Tài khoản" required="" autofocus="">
+        </div>
+
+        <div class="col-md-4">
+          <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="" autofocus="">
+        </div>
+
+        <div class="col-md-3">
+          <button type="button" class="btn btn-add">
+            Đăng nhập
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- Portfolio -->
   <div class="col-md-6">
-    <h3>Danh mục của bạn</h3>
+    <h3> Danh mục của bạn</h3>
+    <select class="form-control">
+      <option value="one"><h3>Danh mục ảo 1</h3></option>
+      <option value="two"><h3>Danh mục ảo 2</h3></option>
+    </select>
 
     <!-- Form -->
     <table class="table table-condensed">
@@ -18,6 +44,7 @@
           <th>#</th>
           <th>Mã chứng khoán</th>
           <th>Khối lượng</th>
+          <th>Tỷ trọng</th>
           <th></th>
         </tr>
       </thead>
@@ -26,6 +53,7 @@
           <td>1</td>
           <td>VND</td>
           <td>500</td>
+          <td>20%</td>
           <td>
             <a href="#"><i class="fa fa-times" aria-hidden="true"></i></a>
           </td>
@@ -33,77 +61,99 @@
       </tbody>
     </table>
 
-    <div class="description">
-      Nhập danh mục
-    </div>
-    <div class="form-group">
-      <div class="col-md-5">
-        <input id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
+    <div class="portfolio-input">
+      <div class="description">
+        Nhập danh mục
       </div>
+      <div class="form-group">
+        <div class="col-md-4">
+          <input id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
+        </div>
 
-      <div class="col-md-5">
-        <input id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="">
-      </div>
+        <div class="col-md-4">
+          <input id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="">
+        </div>
 
-      <div class="col-md-2">
-        <button type="button" class="btn add-symbol">
-          <i class="fa fa-plus" aria-hidden="true"></i>
-        </button>
+        <div class="col-md-4">
+          <button type="button" class="btn btn-add">
+            Thêm mã CK
+          </button>
+        </div>
       </div>
     </div>
+
+    <div class="portfolio-input">
+      <div class="description">
+        Nhập số tiền bạn muốn có
+      </div>
+      <div class="form-group">
+        <div class="col-md-8">
+          <input id="inputMoney" class="form-control" placeholder="Tiền mặt" required="" autofocus="">
+        </div>
+
+        <div class="col-md-4">
+          <button type="button" class="btn btn-add">
+            Thêm tiền mặt
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
-<!-- Ratio -->
+<!-- RATIOS -->
   <div class="col-md-6">
     <h3>Kết quả</h3>
 
+    <div class="col-md-12">
+      <div class="stat col-md-6">
+        <div class="stat-name">
+          Lợi nhuận kì vọng
+        </div>
+
+        <div class="stat-number">
+          15%
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="stat">
+        <div class="stat-name">
+          Chỉ số rủi ro
+        </div>
+
+        <div class="stat-number">
+          0.79
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="stat">
+        <div class="stat-name">
+          Biến động danh mục
+        </div>
+
+        <div class="stat-number">
+          155,755đ
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="stat">
+        <div class="stat-name">
+          Khoản lỗ lớn nhất
+        </div>
+
+        <div class="stat-number">
+          1,360,000đ
+        </div>
+      </div>
+    </div>
+
     <div class="portfolio-stat col-md-12">
-      <div class="col-md-6">
-        <div class="stat">
-          <div class="stat-name">
-            Lợi nhuận kì vọng
-          </div>
 
-          <div class="stat-number">
-            15%
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="stat">
-          <div class="stat-name">
-            Chỉ số rủi ro
-          </div>
-
-          <div class="stat-number">
-            0.79
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="stat">
-          <div class="stat-name">
-            Biến động danh mục
-          </div>
-
-          <div class="stat-number">
-            155,755đ
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="stat">
-          <div class="stat-name">
-            Khoản lỗ lớn nhất
-          </div>
-
-          <div class="stat-number">
-            1,360,000đ
-          </div>
-        </div>
-      </div>
     </div>
   </div>
