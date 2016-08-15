@@ -6,13 +6,15 @@ This Angular module provide interface to VNDIRECT API, include:
 
 angular.module('myApp.tradeapi', [])
 
-.factory('tradeapi', ['$http', function($http) {
+.factory('tradeapi', ['$http', '$q', function($http, $q) {
     var AUTH_URL = 'https://auth-api.vndirect.com.vn/auth';
+    var CUSOMTER_URL = 'https://trade-api.vndirect.com.vn/customer';
 
     var token = null;
 
     return {
         login: function(username, password) {
+            var deferred = $q.defer();
             $http({
                 method: 'POST',
                 url: AUTH_URL,
@@ -22,9 +24,39 @@ angular.module('myApp.tradeapi', [])
                 }
             })
             .then(function(response) {
-                console.log('Login success', response);
-            })
+                deferred.resolve(response.data);
+                token = response.data.token;
+            }, function(response) {
+                deferred.reject(response.data.message);
+            });
+            return deferred.promise;
         },
+
+        /**
+        Retrieve customer information such as cusid, name, accou
+        */
+        retrieve_customer: function() {
+            var deferred = $q.defer();
+            if(token) {
+                $http({
+                    method: 'GET',
+                    url: CUSOMTER_URL,
+                    headers: {
+                        'X-AUTH-TOKEN': token
+                    }
+                })
+                .then(function(response) {
+                    deferred.resolve(response.data);
+                }, function(response) {
+                    deferred.reject(response.data.message);
+                });
+                return deferred.promise;
+            }
+            else{
+                throw 'You are not logged in';
+            }
+        }
+
     };
-});
+}]);
 
