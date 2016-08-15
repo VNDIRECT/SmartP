@@ -14,14 +14,14 @@
       <!-- Asking for username & password-->
       <div class="form-group" ng-show="!is_logged_in">
         <div class="col-md-4">
-          <input id="inputAccount" class="form-control" placeholder="Tài khoản" required="" autofocus="" ng-model="username">
+          <input id="inputAccount" class="form-control" placeholder="Tài khoản" required="" autofocus="">
         </div>
 
         <div class="col-md-4" >
           <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="" autofocus="" ng-model="password">
         </div>
         <div class="col-md-3">
-          <button type="button" class="btn btn-add" ng-click="retrieve_account(username, password)">
+          <button type="button" class="btn btn-add">
             Đăng nhập
           </button>
         </div>
@@ -46,13 +46,10 @@
   <!-- Portfolio details -->
   <div class="col-md-6">
     <h3>Danh mục của bạn</h3>
-
-    <select class="form-control" ng-model="selectedP" ng-options="p.id as p.name for p in portfolio_list"></select>
-<!--     <select class="form-control">
+    <select class="form-control">
       <option value="one"><h3>Danh mục ảo 1</h3></option>
       <option value="two"><h3>Danh mục ảo 2</h3></option>
     </select>
- -->
 
     <!-- Money status  -->
     <div class="money">
@@ -67,12 +64,12 @@
           <th>Mã chứng khoán</th>
           <th>Khối lượng</th>
           <th>Tỷ trọng</th>
-          <th>{{love}}</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr ng-repeat="row in portfolio.data">
-          <td>{{$index}}</td>
+          <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
           <td>{{row.quantity}}</td>
           <td>{{row.percent}}</td>
@@ -83,17 +80,18 @@
       </tbody>
     </table>
 
+    <!-- Input portfolio -->
     <div class="portfolio-input">
-      <div class="description col-md-6">
-        Nhập danh mục
+      <div class="description">
+        Nhập các mã CK trong danh mục của bạn:
       </div>
-      <div class="toggle col-md-6">
+      <!-- <div class="toggle col-md-6">
         <span>Chế độ mua thử CK</span>
         <label class="switch">
           <input type="checkbox">
           <div class="slider round"></div>
         </label>
-      </div>
+      </div> -->
       <div class="form-group">
         <div class="col-md-4">
           <input ng-model="pending_symbol" id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
@@ -104,16 +102,16 @@
         </div>
 
         <div class="col-md-4">
-          <button type="button" class="btn btn-add" ng-click="add_symbol(pending_symbol, pending_quantity)">
+          <button type="button" class="btn btn-add" ng-click="add_symbol()">
             Thêm mã CK
           </button>
         </div>
       </div>
     </div>
 
-    <div class="portfolio-input">
+    <div class="money-input">
       <div class="description">
-        Nhập số tiền bạn muốn có
+        Nhập số tiền của bạn:
       </div>
       <div class="form-group">
         <div class="col-md-8">
@@ -128,11 +126,18 @@
       </div>
     </div>
 
+    <!-- Reset porfolio -->
+    <div class="col-md-4">
+      <button type="button" class="btn reset-portfolio">Xóa Danh mục</button>
+    </div>
   </div>
 
 <!-- RATIOS -->
   <div class="col-md-6">
-    <h3 class="title-ratio">Kết quả</h3>
+    <h3 class="title-ratio">
+      Kết quả
+      <i class="fa fa-spinner fa-spin fa-fw"></i>
+    </h3>
 
     <div class="col-md-12 underline">
       <div class="stat col-md-6">
@@ -143,6 +148,14 @@
         <div class="stat-number">
           {{indicator.expectedReturn * 100 | number:2}}%
         </div>
+      </div>
+
+      <div class="col-md-6">
+        Chart here
+      </div>
+
+      <div class="description col-md-12">
+        Lợi nhuận theo năm của 250 phiên gần nhất là {{indicator.expectedReturn * 100 | number:2}}%.
       </div>
     </div>
 
@@ -156,6 +169,14 @@
           {{indicator.beta | number:3}}
         </div>
       </div>
+
+      <div class="col-md-6">
+        Chart here
+      </div>
+
+      <div class="description col-md-12">
+        Danh mục của bạn biến động bằng {{indicator.beta * 100 | number:1}}% độ biến động thị trường.
+      </div>
     </div>
 
     <div class="col-md-12 underline">
@@ -167,6 +188,14 @@
         <div class="stat-number">
           {{indicator.valueAtRisk | number:0}} đ
         </div>
+      </div>
+
+      <div class="col-md-6">
+        Chart here
+      </div>
+
+      <div class="description col-md-12">
+        Có 5% khả năng lỗ trên {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
       </div>
     </div>
 
@@ -180,9 +209,13 @@
           {{indicator.maxDrawDown | number:0}} đ
         </div>
       </div>
-    </div>
 
-    <div class="portfolio-stat col-md-12">
+      <div class="col-md-6">
+        Chart here
+      </div>
 
+      <div class="description col-md-12">
+        Khoản lỗ lớn nhất trong 250 phiên gần đây là {{indicator.maxDrawDown | number:0}}đ.
+      </div>
     </div>
   </div>
