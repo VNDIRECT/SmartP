@@ -28,22 +28,69 @@ html body {
   margin-right: -4px;
 }
 
-/* Portfolio Statistics */
-.stat {
-  text-align: left;
-}
-.stat-name {
-  font-size: 18px;
-  color: #707070;
-}
-.stat-number {
-  font-size: 30px;
-}
-
+/* Portfolio details */
 .portfolio-input {
   margin-bottom: 45px;
 }
 
 .btn.btn-add {
   width: 100%;
+}
+
+.description.col-md-6 {
+  padding-left: 0;
+}
+
+.toggle.col-md-6 {
+  text-align: right;
+}
+
+.money {
+  margin-top: 10px;
+}
+
+.money-title {
+  text-align: left;
+  font-size: 16px;
+}
+
+.money-status {
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.money-title.col-md-6, .money-status.col-md-6 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Ratios */
+h3.title-ratio{
+  /*padding-left: 15px;*/
+}
+
+.col-md-12.underline {
+  border-bottom: solid thin #eeeeee;
+  padding-left: 0;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.stat.col-md-6 {
+  padding-left: 0;
+}
+
+.stat {
+  text-align: left;
+}
+
+.stat-name {
+  font-size: 16px;
+  color: #707070;
+}
+
+.stat-number {
+  font-size: 30px;
+  font-weight: bold;
 }
