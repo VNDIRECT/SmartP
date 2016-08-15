@@ -29,15 +29,20 @@
 
   </div>
 
-  <!-- Portfolio -->
+  <!-- Portfolio details -->
   <div class="col-md-6">
-    <h3> Danh mục của bạn</h3>
+    <h3>Danh mục của bạn</h3>
     <select class="form-control">
       <option value="one"><h3>Danh mục ảo 1</h3></option>
       <option value="two"><h3>Danh mục ảo 2</h3></option>
     </select>
 
-    <!-- Form -->
+    <!-- Money status  -->
+    <div class="money">
+      <div class="money-title col-md-6">Số tiền đang có:</div>
+      <div class="money-status col-md-6">13,000,000đ</div>
+    </div>
+    <!-- Table symbols -->
     <table class="table table-condensed">
       <thead>
         <tr>
@@ -62,8 +67,15 @@
     </table>
 
     <div class="portfolio-input">
-      <div class="description">
+      <div class="description col-md-6">
         Nhập danh mục
+      </div>
+      <div class="toggle col-md-6">
+        <span>Chế độ mua thử CK</span>
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
       </div>
       <div class="form-group">
         <div class="col-md-4">
@@ -103,7 +115,7 @@
 
 <!-- RATIOS -->
   <div class="col-md-6">
-    <h3>Kết quả</h3>
+    <h3 class="title-ratio">Kết quả</h3>
 
     <div class="col-md-12">
       <div class="stat col-md-6">
@@ -118,7 +130,7 @@
     </div>
 
     <div class="col-md-12">
-      <div class="stat">
+      <div class="stat col-md-6">
         <div class="stat-name">
           Chỉ số rủi ro
         </div>
@@ -130,7 +142,7 @@
     </div>
 
     <div class="col-md-12">
-      <div class="stat">
+      <div class="stat col-md-6">
         <div class="stat-name">
           Biến động danh mục
         </div>
@@ -142,7 +154,7 @@
     </div>
 
     <div class="col-md-12">
-      <div class="stat">
+      <div class="stat col-md-6">
         <div class="stat-name">
           Khoản lỗ lớn nhất
         </div>
