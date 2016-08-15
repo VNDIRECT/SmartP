@@ -184,7 +184,9 @@ angular.module('myApp.view1', ['ngRoute'])
     /**
     */
     $scope.logout = function() {
-        console.log('Logout');
+        $scope.portfolio_list = [];
+        $scope.portfolio = {};
+        $scope.is_logged_in = false;
     }
 
     /**
