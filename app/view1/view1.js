@@ -62,7 +62,39 @@ angular.module('myApp.view1', ['ngRoute'])
         }
     };
 
-    $scope.portfolio = create_portfolio().init();
+    $scope.portfolio_list = [
+        {id: '0001', name: 'Danh mục ảo 1'},
+        {id: '0002', name: 'Danh mục ảo 2'},
+    ];
+    $scope.selectedP = $scope.portfolio_list[0].id;
+
+    $scope.$watch('selectedP', function() {
+        console.log('Update select', $scope.selectedP);
+        $scope.portfolio = portfolio_store.get($scope.selectedP);
+        compute_smartP();
+    });
+
+    /**
+    Handle list of portfolio logic
+    */
+    function create_portfolio_store(p_list) {
+        var portfolio_store = {};
+        for(var i = 0; i < p_list.length; i++) {
+            portfolio_store[p_list[i].id] = create_portfolio().init();
+        }
+        return {
+            /**
+            Select a portfolio
+            */
+            get: function(id) {
+                return portfolio_store[id];
+            },
+
+        }
+    }
+
+    var portfolio_store = create_portfolio_store($scope.portfolio_list);
+    $scope.portfolio = portfolio_store.get($scope.selectedP);
 
     $scope.add_symbol = function() {
         // simple validation to avoid empty string symbol input
