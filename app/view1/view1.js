@@ -25,7 +25,14 @@ angular.module('myApp.view1', ['ngRoute'])
             expectedReturn: 0,
             maxDrawDown: 0,
             valueAtRisk:0
-        }
+        };
+
+        $scope.sim_indicator = {
+            beta: 0,
+            expectedReturn: 0,
+            maxDrawDown: 0,
+            valueAtRisk:0
+        };
     }
 
     reset_indicator_to_default();
@@ -99,6 +106,16 @@ angular.module('myApp.view1', ['ngRoute'])
             get_json: function() {
                 return this.data.reduce(function(o, cur, next) {
                     o[cur.symbol] = cur.quantity;
+                    return o;
+                }, {});
+            },
+
+            /**
+            Return the virtual portfolio, which means include change
+            */
+            get_virtual_json() {
+                return this.data.reduce(function(o, cur, next) {
+                    o[cur.symbol] = cur.quantity + cur.change;
                     return o;
                 }, {});
             },
@@ -188,10 +205,12 @@ angular.module('myApp.view1', ['ngRoute'])
 
     $scope.buy_virtual_symbol = function() {
         $scope.portfolio.virtual_buy($scope.virtual_symbol, $scope.virtual_quantity);
+        compute_smartP();
     };
 
     $scope.sell_virtual_symbol = function() {
         $scope.portfolio.virtual_sell($scope.virtual_symbol, $scope.virtual_quantity);
+        compute_smartP();
     };
 
     $scope.reset = function() {
@@ -233,7 +252,7 @@ angular.module('myApp.view1', ['ngRoute'])
                             portfolio_store.add({
                                 id: data.accountNumber,
                                 name: data.accountNumber,
-                                data: data.stocks
+                                data: data.stocks.map(function(i) {i.change=0; return i})
                             });
                         });
                     }
@@ -273,11 +292,27 @@ angular.module('myApp.view1', ['ngRoute'])
             function(result) {
                 console.log('Computing process has been done with result: ', result);
                 $scope.indicator = result;
-                $scope.is_loading = false;
+
+                /**
+                Compute the virtual indicator and then diff
+                */
+                engineP.compute(
+                    {
+                        portfolio: $scope.portfolio.get_virtual_json(),
+                        cash: $scope.cash || 0
+                    },
+                    function(result) {
+                        console.log('Simulation done', result);
+                        for(var key in result) {
+                            $scope.sim_indicator[key] = - $scope.indicator[key] + result[key];
+                        }
+                        $scope.is_loading = false;
+                    }
+                    );
+
             }, function errorCallback(error) {
                 console.log('error while compute smartP', error);
             });
-
     }
 
 

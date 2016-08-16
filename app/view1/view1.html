@@ -182,7 +182,7 @@
 
         <div class="stat-number">
           {{indicator.expectedReturn * 100 | number:2}}%
-          <span class="simulate-indicator">+100%</span>
+          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.expectedReturn * 100 | number:2 | virtual_change}}%</span>
         </div>
 
         <div id="description">
@@ -198,13 +198,12 @@
             Rủi ro danh mục <small>(Beta)</small>
           </div>
 
-          <div class="stat-number">
-            {{indicator.beta | number:3}}
-            <span class="simulate-indicator">+100</span>
-            <div id="description">
-              <i class="fa fa-info-circle"></i>
-              Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
-            </div>
+        <div class="stat-number">
+          {{indicator.beta | number:3}}
+          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.beta | number:3 | virtual_change}}</span>
+          <div id="description">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
           </div>
         </div>
 
@@ -220,7 +219,7 @@
 
         <div class="stat-number">
           {{indicator.valueAtRisk * 1000 | number:0}} đ
-          <span class="simulate-indicator">+100đ</span>
+          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.valueAtRisk * 1000 | number:0 | virtual_change}} đ</span>
         </div>
 
         <div id="description">
@@ -237,7 +236,7 @@
 
         <div class="stat-number">
           {{indicator.maxDrawDown * 1000 | number:0}} đ
-          <span class="simulate-indicator">+100đ</span>
+          <span class="simulate-indicator">{{sim_indicator.maxDrawDown * 1000 | number:0 | virtual_change}} đ</span>
         </div>
 
         <div id="description">
