@@ -269,6 +269,9 @@ angular.module('myApp.view1', ['ngRoute'])
         $scope.is_logged_in = false;
     }
 
+    $scope.optimize_portfolio = function() {
+        optimize_portfolio();
+    }
     /**
     Handle cash
     */
@@ -318,6 +321,34 @@ angular.module('myApp.view1', ['ngRoute'])
             });
     }
 
+
+    function optimize_portfolio() {
+        $scope.is_loading = true;
+        // reset_indicator_to_default();
+        engineP.optimize(
+            {
+                portfolio: $scope.portfolio.get_json(),
+                cash: $scope.cash || 0
+            },
+            function(result) {
+                console.log('Optimize process has been done with result: ', result);
+
+                setTimeout(function() {
+                    // $scope.indicator = result;
+                    $scope.$apply(function() {
+                        for(var i = 0; i < $scope.portfolio.data.length; i++) {
+                            var entry = $scope.portfolio.data[i];
+                            entry.percent = result[entry['symbol']].ratio;
+                        }
+                        $scope.is_loading = false;
+                    })
+                }, 500);
+
+            }, function errorCallback(error) {
+                console.log('error while compute smartP', error);
+            });
+
+    }
 
     /**
     Gauge Chart Settings

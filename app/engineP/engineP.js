@@ -54,7 +54,19 @@ angular.module('myApp.engineP', [])
                   }, function errorCallback(response) {
                     console.log('Error ', response);
                   });
+            },
 
+            optimize: function(input, callback, errorCallback) {
+                var url = SMARTP_API_URL + '/markowitz?' + _build_engineP_params(input);
+                console.log('Start computing view 1...', url);
+                $http({
+                  method: 'GET',
+                  url: url
+                }).then(function successCallback(response) {
+                    callback(response.data);
+                  }, function errorCallback(response) {
+                    console.log('Error ', response);
+                  });
             }
         }
     }
