@@ -69,7 +69,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     entry.quantity += quantity;
                 }
                 else{
-                    this.data.push({symbol: symbol, quantity: quantity, change: change});
+                    this.data.push({symbol: symbol, quantity: quantity, change: change || 0});
                 }
             },
 
