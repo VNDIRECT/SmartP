@@ -4,8 +4,8 @@ angular.module('myApp.engineP', [])
 
 .factory('engineP', ['$http', function($http) {
 
-    var SMARTP_API_URL = 'https://script.google.com/macros/s/AKfycbweSsf8cPPk__HDZiWxszJ2HdV6s3zJU8WKEErqm41TT3CeI9k/exec';
-    // var SMARTP_API_URL = 'http://localhost:5000';
+    // var SMARTP_API_URL = 'https://script.google.com/macros/s/AKfycbweSsf8cPPk__HDZiWxszJ2HdV6s3zJU8WKEErqm41TT3CeI9k/exec';
+    var SMARTP_API_URL = 'http://192.168.1.23:5000';
 
     /**
     Yet another version of API which use angular $http provder

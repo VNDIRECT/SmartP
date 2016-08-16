@@ -82,7 +82,7 @@
     </table>
 
     <!-- Input portfolio -->
-    <div class="portfolio-input">
+    <div class="portfolio-input" ng-show="!is_simulated">
       <div class="description">
         Nhập các mã CK trong danh mục của bạn:
       </div>
@@ -104,7 +104,7 @@
     </div>
 
     <!-- Similation view -->
-    <div class="portfolio-input">
+    <div class="portfolio-input" ng-show="is_simulated">
       <div class="description">
         Thử mua/bán mã CK:
       </div>
@@ -157,7 +157,7 @@
       <div class="toggle switch-button">
         Chuyển sang mua/bán thử Chứng khoán
         <label class="switch">
-          <input type="checkbox">
+          <input type="checkbox" ng-model="is_simulated">
           <div class="slider round"></div>
         </label>
       </div>

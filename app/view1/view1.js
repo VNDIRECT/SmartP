@@ -17,6 +17,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
     $scope.is_logged_in = false;
     $scope.is_loading = false;
+    $scope.is_simulated = false;
 
     function reset_indicator_to_default() {
         $scope.indicator = {
