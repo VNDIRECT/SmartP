@@ -233,7 +233,7 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.gauge_options = {
         size: 300,
         clipWidth: 300,
-        clipHeight: 300,
+        clipHeight: 170,
         ringWidth: 60,
         maxValue: 2,
         transitionMs: 4000,
