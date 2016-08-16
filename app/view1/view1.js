@@ -18,7 +18,6 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.is_logged_in = false;
     $scope.is_loading = false;
     $scope.is_simulated = false;
-
     function reset_indicator_to_default() {
         $scope.indicator = {
             beta: 0,
@@ -283,7 +282,7 @@ angular.module('myApp.view1', ['ngRoute'])
     */
     function compute_smartP() {
         $scope.is_loading = true;
-        reset_indicator_to_default();
+        // reset_indicator_to_default();
         engineP.compute(
             {
                 portfolio: $scope.portfolio.get_json(),
@@ -291,24 +290,28 @@ angular.module('myApp.view1', ['ngRoute'])
             },
             function(result) {
                 console.log('Computing process has been done with result: ', result);
-                $scope.indicator = result;
 
-                /**
-                Compute the virtual indicator and then diff
-                */
-                engineP.compute(
-                    {
-                        portfolio: $scope.portfolio.get_virtual_json(),
-                        cash: $scope.cash || 0
-                    },
-                    function(result) {
-                        console.log('Simulation done', result);
-                        for(var key in result) {
-                            $scope.sim_indicator[key] = - $scope.indicator[key] + result[key];
+                setTimeout(function() {
+                    $scope.indicator = result;
+
+                    /**
+                    Compute the virtual indicator and then diff
+                    */
+                    engineP.compute(
+                        {
+                            portfolio: $scope.portfolio.get_virtual_json(),
+                            cash: $scope.cash || 0
+                        },
+                        function(result) {
+                            console.log('Simulation done', result);
+                            for(var key in result) {
+                                $scope.sim_indicator[key] = - $scope.indicator[key] + result[key];
+                            }
+                            $scope.is_loading = false;
                         }
-                        $scope.is_loading = false;
-                    }
-                    );
+                        );
+
+                }, 500);
 
             }, function errorCallback(error) {
                 console.log('error while compute smartP', error);
