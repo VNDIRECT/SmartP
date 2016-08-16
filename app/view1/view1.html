@@ -72,7 +72,7 @@
         <tr ng-repeat="row in portfolio.data">
           <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
-          <td>{{row.quantity | number}} <span class="simulation-mode">+100</span></td>
+          <td>{{row.quantity | number}} <span ng-show="is_simulated" class="simulation-mode">{{row.change | virtual_change}}</span></td>
           <td>{{row.percent}}</td>
           <td>
             <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -110,21 +110,21 @@
       </div>
       <div class="form-group">
         <div class="col-md-4">
-          <input ng-model="pending_symbol" id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
+          <input id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="" ng-model="virtual_symbol">
         </div>
 
         <div class="col-md-4">
-          <input type="number" ng-model="pending_quantity" id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="">
+          <input type="number" id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="" ng-model="virtual_quantity">
         </div>
 
         <div class="col-md-2" id="my-button-buy">
-          <button type="button" class="btn btn-add btn-buy" ng-click="add_symbol()">
+          <button type="button" class="btn btn-add btn-buy" ng-click="buy_virtual_symbol()">
             Mua
           </button>
         </div>
 
         <div class="col-md-2" id="my-button-sell">
-          <button type="button" class="btn btn-add btn-sell">
+          <button type="button" class="btn btn-add btn-sell" ng-click="sell_virtual_symbol()">
             Bán
           </button>
         </div>

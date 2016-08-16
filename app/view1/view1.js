@@ -33,28 +33,64 @@ angular.module('myApp.view1', ['ngRoute'])
     /**
     Handle portfolio logic:
     If symbol exists when added, increase the current quantity instead
+
+    For easy rendering with Angular, virtual change will be added to each real portfolio
     */
     function create_portfolio() {
         var default_data =
             [
-                {symbol: 'VND', quantity: 200},
-                {symbol: 'SSI', quantity: 100},
+                {symbol: 'VND', quantity: 200, change: -100},
+                {symbol: 'SSI', quantity: 500, change: 100},
             ];
         return {
             data: [],
 
-            add: function(symbol, quantity) {
+            /**
+                return null if symbol does not exist
+            */
+            get_entry: function(symbol) {
                 for(var i = 0; i < this.data.length; i++) {
                     if(this.data[i].symbol == symbol) {
-                        this.data[i].quantity += quantity;
-                        return;
+                        return this.data[i];
                     }
                 }
-                this.data.push({symbol: symbol, quantity: quantity});
+                return null;
+            },
+
+            add: function(symbol, quantity, change) {
+                var entry = this.get_entry(symbol);
+                if(entry) {
+                    entry.quantity += quantity;
+                }
+                else{
+                    this.data.push({symbol: symbol, quantity: quantity, change: change});
+                }
             },
 
             remove: function(index) {
                 this.data.splice(index, 1);
+            },
+
+            virtual_buy: function(symbol, quantity) {
+                if(symbol && quantity) {
+                    var entry = this.get_entry(symbol);
+                    if(entry) {
+                        entry.change += quantity;
+                    }
+                    else{
+                        this.data.push({symbol: symbol, quantity: 0, change: quantity});
+                    }
+                }
+            },
+
+            virtual_sell: function(symbol, quantity) {
+                if(symbol && quantity) {
+                    var entry = this.get_entry(symbol);
+                    if(entry) {
+                        entry.change -= quantity;
+                    }
+                    // do nothing if there is no symbol in that portfolio
+                }
             },
 
             /**
@@ -74,7 +110,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 var data = init_data || default_data;
                 this.data.length = 0;
                 for(var i = 0; i < data.length; i++) {
-                    this.add(data[i].symbol, data[i].quantity);
+                    this.add(data[i].symbol, data[i].quantity, data[i].change);
                 }
                 return this;
             }
@@ -133,10 +169,9 @@ angular.module('myApp.view1', ['ngRoute'])
     var portfolio_store = create_portfolio_store($scope.portfolio_list);
     $scope.portfolio = portfolio_store.get($scope.selectedP);
 
-    $scope.add_symbol = function(symbol, quantity) {
+    $scope.add_symbol = function() {
         // TODO: move add_symbol into a function itself?
         // this might help avoid leaking $scope variable
-        console.log('Adding symbol', symbol, quantity);
         // simple validation to avoid empty string symbol input
         if($scope.pending_symbol.length > 0) {
             $scope.portfolio.add($scope.pending_symbol, $scope.pending_quantity);
@@ -149,6 +184,14 @@ angular.module('myApp.view1', ['ngRoute'])
     $scope.remove_symbol = function(index) {
         $scope.portfolio.remove(index);
         compute_smartP();
+    };
+
+    $scope.buy_virtual_symbol = function() {
+        $scope.portfolio.virtual_buy($scope.virtual_symbol, $scope.virtual_quantity);
+    };
+
+    $scope.sell_virtual_symbol = function() {
+        $scope.portfolio.virtual_sell($scope.virtual_symbol, $scope.virtual_quantity);
     };
 
     $scope.reset = function() {
@@ -274,5 +317,16 @@ Allow format number in input
             });
         }
     };
-}]);
+}])
+
+.filter('virtual_change', function() {
+    return function(input) {
+        if(input >= 0) {
+            return '+' + input;
+        }
+        else {
+            return input;
+        }
+    }
+})
 
