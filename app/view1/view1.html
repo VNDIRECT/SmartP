@@ -1,5 +1,5 @@
 <div class="container">
-  <!-- Header -->
+<!-- HEADER -->
   <div class="page-header title col-md-12">
     <div class="col-md-6">
       <h2>
@@ -30,7 +30,7 @@
       <!-- Display name when logged in -->
       <div ng-show="is_logged_in">
         <div class="user-detail">
-          {{full_name}}
+          Xin chào, {{full_name}}
           <a href=""><i class="fa fa-sign-out" ng-click="logout()"></i></a>
         </div>
         <!-- <div class="col-md-3">
@@ -44,7 +44,7 @@
 
   </div>
 
-  <!-- Portfolio details -->
+<!-- PORTFOLIO DETAILS -->
   <div class="col-md-6">
     <h3>Danh mục đầu tư</h3>
     <select class="form-control" ng-model="selectedP" ng-options="p.id as p.name for p in portfolio_list"></select>
@@ -54,7 +54,7 @@
       <div class="money-title col-md-6">Tiền mặt:</div>
       <div class="col-md-2"></div>
       <div class="money-status col-md-4">
-        <input id="inputMoney" class="form-control" placeholder="Nhập số tiền" required="" autofocus="">
+        <input id="inputMoney" class="form-control" placeholder="Số dư tiền" required="" autofocus="">
       </div>
     </div>
     <!-- Table portfolio -->
@@ -180,15 +180,15 @@
         <div class="stat-number">
           {{indicator.expectedReturn * 100 | number:2}}%
         </div>
+
+        <div id="description">
+          <i class="fa fa-info-circle"></i>
+          Lợi nhuận kỳ vọng của danh mục sau một năm là {{indicator.expectedReturn * 100 | number:2}}%.
+        </div>
       </div>
 
       <div class="col-md-6">
         Chart here
-      </div>
-
-      <div class="description col-md-12">
-        <i class="fa fa-info-circle"></i>
-        Lợi nhuận theo năm của 250 phiên gần nhất là {{indicator.expectedReturn * 100 | number:2}}%.
       </div>
     </div>
 
@@ -199,7 +199,11 @@
         </div>
 
         <div class="stat-number">
-          {{indicator.beta | number:3}}
+          {{indicator.beta | number:3}} <br>
+          <div id="description">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
+          </div>
         </div>
       </div>
 
@@ -207,10 +211,7 @@
         <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
       </div>
 
-      <div class="description col-md-12">
-        <i class="fa fa-info-circle"></i>
-        Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
-      </div>
+
     </div>
 
     <div class="col-md-12 underline">
@@ -222,15 +223,15 @@
         <div class="stat-number">
           {{indicator.valueAtRisk | number:0}} đ
         </div>
+
+        <div id="description">
+          <i class="fa fa-info-circle"></i>
+          Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
+        </div>
       </div>
 
       <div class="col-md-6">
         Chart here
-      </div>
-
-      <div class="description col-md-12">
-        <i class="fa fa-info-circle"></i>
-        Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
       </div>
     </div>
 
@@ -243,15 +244,16 @@
         <div class="stat-number">
           {{indicator.maxDrawDown | number:0}} đ
         </div>
+
+        <div id="description">
+          <i class="fa fa-info-circle"></i>
+          Danh mục của bạn lỗ tối đa {{indicator.maxDrawDown | number:0}}đ trong một năm.
+        </div>
+
       </div>
 
       <div class="col-md-6">
         Chart here
-      </div>
-
-      <div class="description col-md-12">
-        <i class="fa fa-info-circle"></i>
-        Khoản lỗ lớn nhất trong 250 phiên gần đây là {{indicator.maxDrawDown | number:0}}đ.
       </div>
     </div>
   </div>
