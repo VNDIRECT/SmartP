@@ -163,6 +163,15 @@ span.simulation-mode {
   margin-top: 10px;
   background-color: #E0E0E0;
 }
+
+.btn.optimal-portfolio {
+  width: 100%;
+  margin-top: 10px;
+  background-color: #F9A825;
+  color: #fff;
+  font-weight: bold;
+}
+
 /* Ratios */
 h3.title-ratio{
   /*padding-left: 15px;*/
