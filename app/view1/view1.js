@@ -234,7 +234,7 @@ angular.module('myApp.view1', ['ngRoute'])
         clipWidth: 300,
         clipHeight: 300,
         ringWidth: 60,
-        maxValue: 5,
+        maxValue: 2,
         transitionMs: 4000,
         height: 500,
     };
