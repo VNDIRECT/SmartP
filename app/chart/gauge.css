@@ -9,7 +9,7 @@
 
 #power-gauge g.label text {
     text-anchor: middle;
-    font-size: 14px;
+    font-size: 8px;
     font-weight: bold;
     fill: #666;
 }

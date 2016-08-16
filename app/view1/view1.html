@@ -20,9 +20,9 @@
         <div class="col-md-4" >
           <input type="password" id="inputPassword" class="form-control" placeholder="Mật khẩu" required="" autofocus="" ng-model="password">
         </div>
-        <div class="col-md-3">
-          <button type="button" class="btn btn-add" ng-click="retrieve_account(username, password)">
-            Đăng nhập
+        <div class="col-md-4">
+          <button type="button" class="btn btn-add btn-login" ng-click="retrieve_account(username, password)">
+            Đăng nhập <i class="fa fa-sign-in"></i>
           </button>
         </div>
       </div>
@@ -30,7 +30,8 @@
       <!-- Display name when logged in -->
       <div ng-show="is_logged_in">
         <div class="user-detail">
-          Xin chào, {{full_name}} <i class="fa fa-sign-out" ng-click="logout()"></i>
+          {{full_name}}
+          <a href=""><i class="fa fa-sign-out" ng-click="logout()"></i></a>
         </div>
         <!-- <div class="col-md-3">
           <button type="button" class="btn btn-add" ng-click="logout()">
@@ -45,13 +46,16 @@
 
   <!-- Portfolio details -->
   <div class="col-md-6">
-    <h3>Danh mục của bạn</h3>
+    <h3>Danh mục đầu tư</h3>
     <select class="form-control" ng-model="selectedP" ng-options="p.id as p.name for p in portfolio_list"></select>
 
     <!-- Money status  -->
     <div class="money">
       <div class="money-title col-md-6">Tiền mặt:</div>
-      <div class="money-status col-md-6">13,000,000đ</div>
+      <div class="col-md-2"></div>
+      <div class="money-status col-md-4">
+        <input id="inputMoney" class="form-control" placeholder="Nhập số tiền" required="" autofocus="">
+      </div>
     </div>
     <!-- Table portfolio -->
     <table class="table table-condensed">
@@ -77,26 +81,11 @@
       </tbody>
     </table>
 
-    <div class="toggle switch-button">
-      Tối ưu danh mục
-      <label class="switch">
-        <input type="checkbox">
-        <div class="slider round"></div>
-      </label>
-    </div>
-
     <!-- Input portfolio -->
     <div class="portfolio-input">
       <div class="description">
-        Nhập các mã CK trong danh mục:
+        Nhập các mã CK trong danh mục của bạn:
       </div>
-      <!-- <div class="toggle col-md-6">
-        <span>Chế độ mua thử CK</span>
-        <label class="switch">
-          <input type="checkbox">
-          <div class="slider round"></div>
-        </label>
-      </div> -->
       <div class="form-group">
         <div class="col-md-4">
           <input ng-model="pending_symbol" id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
@@ -107,14 +96,42 @@
         </div>
 
         <div class="col-md-4">
-          <button type="button" class="btn btn-add" ng-click="add_symbol()">
+          <button type="button" class="btn btn-add add-symbol" ng-click="add_symbol()">
             Thêm mã CK
           </button>
         </div>
       </div>
     </div>
 
-    <div class="money-input">
+    <!-- Similation view -->
+    <div class="portfolio-input">
+      <div class="description">
+        Thử mua/bán mã CK:
+      </div>
+      <div class="form-group">
+        <div class="col-md-4">
+          <input ng-model="pending_symbol" id="inputSymbol" class="form-control" placeholder="Mã Chứng khoán" required="" autofocus="">
+        </div>
+
+        <div class="col-md-4">
+          <input type="number" ng-model="pending_quantity" id="inputQuantity" class="form-control" placeholder="Khối lượng" required="" autofocus="">
+        </div>
+
+        <div class="col-md-2" id="my-button-buy">
+          <button type="button" class="btn btn-add btn-buy" ng-click="add_symbol()">
+            Mua
+          </button>
+        </div>
+
+        <div class="col-md-2" id="my-button-sell">
+          <button type="button" class="btn btn-add btn-sell" ng-click="add_symbol()">
+            Bán
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="money-input">
       <div class="description">
         Nhập số tiền của bạn:
       </div>
@@ -124,16 +141,26 @@
         </div>
 
         <div class="col-md-4">
-          <button type="button" class="btn btn-add" ng-click="reset()">
+          <button type="button" class="btn btn-add add-money" ng-click="reset()">
             Thêm tiền mặt
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Reset porfolio -->
     <div class="col-md-4">
       <button type="button" class="btn reset-portfolio">Xóa Danh mục</button>
+    </div>
+
+    <div class="col-md-8">
+      <div class="toggle switch-button">
+        Chuyển sang mua/bán thử Chứng khoán
+        <label class="switch">
+          <input type="checkbox">
+          <div class="slider round"></div>
+        </label>
+      </div>
     </div>
   </div>
 
@@ -160,6 +187,7 @@
       </div>
 
       <div class="description col-md-12">
+        <i class="fa fa-info-circle"></i>
         Lợi nhuận theo năm của 250 phiên gần nhất là {{indicator.expectedReturn * 100 | number:2}}%.
       </div>
     </div>
@@ -180,7 +208,8 @@
       </div>
 
       <div class="description col-md-12">
-        Danh mục của bạn biến động bằng {{indicator.beta * 100 | number:1}}% độ biến động thị trường.
+        <i class="fa fa-info-circle"></i>
+        Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
       </div>
     </div>
 
@@ -200,7 +229,8 @@
       </div>
 
       <div class="description col-md-12">
-        Có 5% khả năng lỗ trên {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
+        <i class="fa fa-info-circle"></i>
+        Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
       </div>
     </div>
 
@@ -220,6 +250,7 @@
       </div>
 
       <div class="description col-md-12">
+        <i class="fa fa-info-circle"></i>
         Khoản lỗ lớn nhất trong 250 phiên gần đây là {{indicator.maxDrawDown | number:0}}đ.
       </div>
     </div>
