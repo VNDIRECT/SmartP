@@ -339,6 +339,7 @@ angular.module('myApp.view1', ['ngRoute'])
                         for(var i = 0; i < $scope.portfolio.data.length; i++) {
                             var entry = $scope.portfolio.data[i];
                             entry.percent = result[entry['symbol']].ratio;
+                            entry.best_quantity = result[entry['symbol']].quantity;
                         }
                         $scope.is_loading = false;
                     })
@@ -402,7 +403,7 @@ Allow format number in input
 
 .filter('virtual_change', function() {
     return function(input) {
-        if(input >= 0) {
+        if(parseFloat(input) >= 0) {
             return '+' + input;
         }
         else {

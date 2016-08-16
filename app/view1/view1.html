@@ -62,9 +62,10 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Mã chứng khoán</th>
-          <th>Khối lượng</th>
+          <th>Mã CK</th>
+          <th>KL</th>
           <th>Tỷ trọng</th>
+          <th>KL tối ưu</th>
           <th>Tỷ trọng tối ưu</th>
           <th></th>
         </tr>
@@ -75,6 +76,7 @@
           <td>{{row.symbol}}</td>
           <td>{{row.quantity | number}} <span ng-show="is_simulated" class="simulation-mode">{{row.change | virtual_change}}</span></td>
           <td></td>
+          <td>{{row.best_quantity}}</td>
           <td>{{row.percent * 100 | number:2}} %</td>
           <td>
             <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -153,7 +155,7 @@
     <!-- Reset porfolio -->
     <div class="col-md-4">
       <!-- <button type="button" class="btn reset-portfolio">Xóa Danh mục</button> -->
-      <button type="button" class="btn optimal-portfolio" ng-click="optimize_portfolio()">Tối ưu danh mục</button>
+      <button type="button" class="btn btn-add optimal-portfolio" ng-click="optimize_portfolio()">Tối ưu danh mục</button>
     </div>
 
     <div class="col-md-8">
@@ -248,7 +250,7 @@
           </div>
           <div ng-show="is_simulated">
             <i class="fa fa-info-circle"></i>
-            Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk * 1000 + sim_indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
+            Danh mục của bạn có 5% khả năng lỗ lớn hơn {{indicator.valueAtRisk * 1000 + sim_indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
           </div>
         </div>
       </div>
