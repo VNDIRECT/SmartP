@@ -242,10 +242,10 @@ angular.module('myApp.view1', ['ngRoute'])
     Gauge Chart Settings
     */
     $scope.gauge_options = {
-        size: 300,
-        clipWidth: 300,
-        clipHeight: 170,
-        ringWidth: 60,
+        size: 250,
+        clipWidth: 250,
+        clipHeight: 140,
+        ringWidth: 50,
         maxValue: 2,
         transitionMs: 4000,
         height: 500,
@@ -275,4 +275,3 @@ Allow format number in input
         }
     };
 }]);
-

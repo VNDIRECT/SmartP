@@ -172,9 +172,12 @@
     </h3>
 
     <div class="col-md-12 underline">
-      <div class="stat col-md-6">
+      <div class="stat col-md-6" id="stat-no-chart">
+        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
+
         <div class="stat-name">
-          Lợi nhuận kì vọng <small>(Expected return)</small>
+          Lợi nhuận kì vọng <br>
+          <small>(Expected return)</small>
         </div>
 
         <div class="stat-number">
@@ -188,38 +191,31 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        Chart here
-      </div>
-    </div>
+      <div class="stat col-md-6" id="stat-no-chart">
+        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
+        <div class="center-indicator">
+          <div class="stat-name">
+            Rủi ro danh mục <small>(Beta)</small>
+          </div>
 
-    <div class="col-md-12 underline">
-      <div class="stat col-md-6">
-        <div class="stat-name">
-          Rủi ro danh mục <small>(Beta)</small>
-        </div>
-
-        <div class="stat-number">
-          {{indicator.beta | number:3}}
-          <span class="simulate-indicator">+100</span>
-          <div id="description">
-            <i class="fa fa-info-circle"></i>
-            Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
+          <div class="stat-number">
+            {{indicator.beta | number:3}}
+            <span class="simulate-indicator">+100</span>
+            <div id="description">
+              <i class="fa fa-info-circle"></i>
+              Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
+            </div>
           </div>
         </div>
+
       </div>
-
-      <div class="col-md-6">
-        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
-      </div>
-
-
     </div>
 
     <div class="col-md-12 underline">
-      <div class="stat col-md-6">
+      <div class="stat col-md-6" id="stat-no-chart">
         <div class="stat-name">
-          Giá trị chịu rủi ro <small>(Value at risk)</small>
+          Giá trị chịu rủi ro <br>
+          <small>(Value at risk)</small>
         </div>
 
         <div class="stat-number">
@@ -233,15 +229,10 @@
         </div>
       </div>
 
-      <div class="col-md-6">
-        Chart here
-      </div>
-    </div>
-
-    <div class="col-md-12 underline">
-      <div class="stat col-md-6">
+      <div class="stat col-md-6" id="stat-no-chart">
         <div class="stat-name">
-          Khoản lỗ lớn nhất <small>(Max drawdown)</small>
+          Khoản lỗ lớn nhất <br>
+          <small>(Max drawdown)</small>
         </div>
 
         <div class="stat-number">
@@ -253,11 +244,6 @@
           <i class="fa fa-info-circle"></i>
           Danh mục của bạn lỗ tối đa {{indicator.maxDrawDown * 1000 | number:0}}đ trong một năm.
         </div>
-
-      </div>
-
-      <div class="col-md-6">
-        Chart here
       </div>
     </div>
   </div>
