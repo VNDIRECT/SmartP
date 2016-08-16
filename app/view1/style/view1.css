@@ -2,6 +2,10 @@ html body {
   background-color: #FCFCFF;
 }
 
+.container.smartP {
+  margin-bottom: 50px;
+}
+
 .divider {
   border-bottom: solid thin #eeeeee;
   padding-left: 0;
@@ -60,13 +64,35 @@ html body {
 /* Switch button */
 .toggle.switch-button {
   text-align: right;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 18px;
 }
 
 /* Portfolio details */
-.portfolio-input {
-  margin-bottom: 45px;
+span.simulation-mode {
+  font-size: 12px;
+  font-weight: bold;
+  color: #2E7D32;
+}
+
+.portfolio-input.col-md-12 {
+  padding: 10px 0;
+}
+
+#input-description {
+  padding-left: 15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/*#portfolio-input {
+  border: 1px solid #ECEFF1;
+}*/
+
+#simulation-mode {
+  background-color: #FAFAFA;
+  border: 1px solid #ECEFF1;
 }
 
 .btn.btn-add.add-symbol, .btn.btn-add.add-money  {
@@ -135,7 +161,7 @@ html body {
 .btn.reset-portfolio {
   width: 100%;
   margin-top: 10px;
-  background-color: #E7E8F0;
+  background-color: #E0E0E0;
 }
 /* Ratios */
 h3.title-ratio{
@@ -171,4 +197,8 @@ h3.title-ratio{
   font-size: 14px;
   font-weight: normal;
   text-align: left;
+}
+
+span.simulate-indicator {
+  font-size: 18px;
 }

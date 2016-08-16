@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container smartP">
 <!-- HEADER -->
   <div class="page-header title col-md-12">
     <div class="col-md-6">
@@ -72,7 +72,7 @@
         <tr ng-repeat="row in portfolio.data">
           <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
-          <td>{{row.quantity | number}}</td>
+          <td>{{row.quantity | number}} <span class="simulation-mode">+100</span></td>
           <td>{{row.percent}}</td>
           <td>
             <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -82,8 +82,8 @@
     </table>
 
     <!-- Input portfolio -->
-    <div class="portfolio-input" ng-show="!is_simulated">
-      <div class="description">
+    <div class="portfolio-input col-md-12" ng-show="!is_simulated" id="portfolio-input">
+      <div class="description" id="input-description">
         Nhập các mã CK trong danh mục của bạn:
       </div>
       <div class="form-group">
@@ -104,8 +104,8 @@
     </div>
 
     <!-- Similation view -->
-    <div class="portfolio-input" ng-show="is_simulated">
-      <div class="description">
+    <div class="portfolio-input col-md-12" ng-show="is_simulated" id="simulation-mode">
+      <div class="description" id="input-description">
         Thử mua/bán mã CK:
       </div>
       <div class="form-group">
@@ -124,7 +124,7 @@
         </div>
 
         <div class="col-md-2" id="my-button-sell">
-          <button type="button" class="btn btn-add btn-sell" ng-click="add_symbol()">
+          <button type="button" class="btn btn-add btn-sell">
             Bán
           </button>
         </div>
@@ -179,6 +179,7 @@
 
         <div class="stat-number">
           {{indicator.expectedReturn * 100 | number:2}}%
+          <span class="simulate-indicator">+100%</span>
         </div>
 
         <div id="description">
@@ -199,7 +200,8 @@
         </div>
 
         <div class="stat-number">
-          {{indicator.beta | number:3}} <br>
+          {{indicator.beta | number:3}}
+          <span class="simulate-indicator">+100</span>
           <div id="description">
             <i class="fa fa-info-circle"></i>
             Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
@@ -221,12 +223,13 @@
         </div>
 
         <div class="stat-number">
-          {{indicator.valueAtRisk | number:0}} đ
+          {{indicator.valueAtRisk * 1000 | number:0}} đ
+          <span class="simulate-indicator">+100đ</span>
         </div>
 
         <div id="description">
           <i class="fa fa-info-circle"></i>
-          Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk | number:0}}đ trong một phiên giao dịch.
+          Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
         </div>
       </div>
 
@@ -242,12 +245,13 @@
         </div>
 
         <div class="stat-number">
-          {{indicator.maxDrawDown | number:0}} đ
+          {{indicator.maxDrawDown * 1000 | number:0}} đ
+          <span class="simulate-indicator">+100đ</span>
         </div>
 
         <div id="description">
           <i class="fa fa-info-circle"></i>
-          Danh mục của bạn lỗ tối đa {{indicator.maxDrawDown | number:0}}đ trong một năm.
+          Danh mục của bạn lỗ tối đa {{indicator.maxDrawDown * 1000 | number:0}}đ trong một năm.
         </div>
 
       </div>
