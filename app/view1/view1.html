@@ -54,7 +54,7 @@
       <div class="money-title col-md-6">Tiền mặt:</div>
       <div class="col-md-2"></div>
       <div class="money-status col-md-4">
-        <input id="inputMoney" class="form-control" placeholder="Nhập số tiền" required="" autofocus="" ng-model="cash" format="number">
+        <input id="inputMoney" class="form-control" placeholder="nghìn đồng" required="" autofocus="" ng-model="cash" format="number">
       </div>
     </div>
     <!-- Table portfolio -->
@@ -64,7 +64,6 @@
           <th>#</th>
           <th>Mã CK</th>
           <th>KL</th>
-          <th>Tỷ trọng</th>
           <th>KL tối ưu</th>
           <th>Tỷ trọng tối ưu</th>
           <th></th>
@@ -75,7 +74,6 @@
           <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
           <td>{{row.quantity | number}} <span ng-show="is_simulated" class="simulation-mode">{{row.change | virtual_change}}</span></td>
-          <td></td>
           <td>{{row.best_quantity}}</td>
           <td>{{row.percent * 100 | number:2}} %</td>
           <td>
