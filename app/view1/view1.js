@@ -202,8 +202,6 @@ angular.module('myApp.view1', ['ngRoute'])
         );
     }
 
-    /**
-    */
     $scope.logout = function() {
         init_portfolio_list();
         $scope.portfolio.init();
@@ -211,18 +209,31 @@ angular.module('myApp.view1', ['ngRoute'])
     }
 
     /**
+    Handle cash
+    */
+    $scope.$watch('cash', function(data) {
+        console.log('Cash changed', data);
+        compute_smartP();
+    });
+
+    /**
     Call engineP and update all indicators
     */
     function compute_smartP() {
         $scope.is_loading = true;
         reset_indicator_to_default();
-        engineP.compute($scope.portfolio.get_json(), function(result) {
-            console.log('Computing process has been done with result: ', result);
-            $scope.indicator = result;
-            $scope.is_loading = false;
-        }, function errorCallback(error) {
-            console.log('error while compute smartP', error);
-        });
+        engineP.compute(
+            {
+                portfolio: $scope.portfolio.get_json(),
+                cash: $scope.cash || 0
+            },
+            function(result) {
+                console.log('Computing process has been done with result: ', result);
+                $scope.indicator = result;
+                $scope.is_loading = false;
+            }, function errorCallback(error) {
+                console.log('error while compute smartP', error);
+            });
 
     }
 
@@ -239,4 +250,29 @@ angular.module('myApp.view1', ['ngRoute'])
         transitionMs: 4000,
         height: 500,
     };
+}])
+
+/**
+Allow format number in input
+*/
+.directive('format', ['$filter', function ($filter) {
+    return {
+        require: '?ngModel',
+        link: function (scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+
+
+            ctrl.$formatters.unshift(function (a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+
+
+            ctrl.$parsers.unshift(function (viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
 }]);
+

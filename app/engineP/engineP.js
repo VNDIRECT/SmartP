@@ -16,12 +16,14 @@ angular.module('myApp.engineP', [])
             var symbols = [];
             var quantities = [];
 
-            for(var key in input) {
+            for(var key in input.portfolio) {
                 symbols.push(key);
-                quantities.push(input[key]);
+                quantities.push(input.portfolio[key]);
             }
 
-            return 'symbols=' + symbols.join(',') + '&' + 'quantities=' + quantities.join(',');
+            return 'symbols=' + symbols.join(',') + '&' +
+                    'quantities=' + quantities.join(',') + '&' +
+                    'cash=' + input.cash;
         }
 
         /**
@@ -35,7 +37,7 @@ angular.module('myApp.engineP', [])
         return {
             /**
             Accept a json obj:
-            {symbols: {VND: 100, SSI: 100}, cash: 1000}
+            {portfolio: {VND: 100, SSI: 100}, cash: 1000}
 
             Callback with:
             {risk: 0.9, expectedReturn: -1.2}
@@ -48,14 +50,8 @@ angular.module('myApp.engineP', [])
                   url: url
                 }).then(function successCallback(response) {
                     callback(response.data);
-                    // callback({
-                    //     risk: _format_number(response.data.risk),
-                    //     expectedReturn: _format_number(response.data.expectedReturn)
-                    // });
                   }, function errorCallback(response) {
                     console.log('Error ', response);
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
                   });
 
             }
