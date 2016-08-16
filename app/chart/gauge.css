@@ -3,8 +3,8 @@
     }
 
 #power-gauge g.pointer {
-    fill: #e85116;
-    stroke: #b64011;
+    fill: #F57F17;
+    stroke: #F57F17;
 }
 
 #power-gauge g.label text {

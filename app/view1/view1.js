@@ -322,12 +322,24 @@ angular.module('myApp.view1', ['ngRoute'])
     /**
     Gauge Chart Settings
     */
-    $scope.gauge_options = {
+    $scope.gauge_options_beta = {
         size: 250,
         clipWidth: 250,
         clipHeight: 140,
         ringWidth: 50,
+        minValue: -1,
         maxValue: 2,
+        transitionMs: 4000,
+        height: 500,
+    };
+
+    $scope.gauge_options_expectedReturn = {
+        size: 250,
+        clipWidth: 250,
+        clipHeight: 140,
+        ringWidth: 50,
+        minValue: -50,
+        maxValue: 50,
         transitionMs: 4000,
         height: 500,
     };
@@ -367,4 +379,3 @@ Allow format number in input
         }
     }
 });
-
