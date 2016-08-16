@@ -166,7 +166,9 @@ h3.title-ratio{
   font-weight: bold;
 }
 
-.description.col-md-12 {
-  padding-left: 0;
+#description {
   color: #B5B6B8;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: left;
 }

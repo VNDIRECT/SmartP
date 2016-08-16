@@ -11,7 +11,7 @@ function gauge_chart(container, configuration) {
         pointerTailLength           : 5,
         pointerHeadLengthPercent    : 0.9,
 
-        minValue                    : 0,
+        minValue                    : -1,
         maxValue                    : 10,
 
         minAngle                    : -90,
