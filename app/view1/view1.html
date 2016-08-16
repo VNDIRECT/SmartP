@@ -65,6 +65,7 @@
           <th>Mã chứng khoán</th>
           <th>Khối lượng</th>
           <th>Tỷ trọng</th>
+          <th>Tỷ trọng tối ưu</th>
           <th></th>
         </tr>
       </thead>
@@ -73,6 +74,7 @@
           <td>{{$index+1}}</td>
           <td>{{row.symbol}}</td>
           <td>{{row.quantity | number}} <span ng-show="is_simulated" class="simulation-mode">{{row.change | virtual_change}}</span></td>
+          <td></td>
           <td>{{row.percent}}</td>
           <td>
             <a href="" ng-click="remove_symbol($index)"><i class="fa fa-times" aria-hidden="true"></i></a>
@@ -150,7 +152,8 @@
 
     <!-- Reset porfolio -->
     <div class="col-md-4">
-      <button type="button" class="btn reset-portfolio">Xóa Danh mục</button>
+      <!-- <button type="button" class="btn reset-portfolio">Xóa Danh mục</button> -->
+      <button type="button" class="btn optimal-portfolio">Tối ưu danh mục</button>
     </div>
 
     <div class="col-md-8">
@@ -170,79 +173,107 @@
       Kết quả
       <i class="fa fa-spinner fa-spin fa-fw" ng-show="is_loading"></i>
     </h3>
-
+    <!-- Expected Return and Beta -->
     <div class="col-md-12 underline">
       <div class="stat col-md-6" id="stat-no-chart">
-        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
+        <gauge-chart height="options.height" value="indicator.expectedReturn" options="gauge_options_expectedReturn"></gauge-chart>
 
         <div class="stat-name">
           Lợi nhuận kì vọng <br>
-          <small>(Expected return)</small>
+          <!-- <small>(Expected return)</small> -->
         </div>
 
         <div class="stat-number">
           {{indicator.expectedReturn * 100 | number:2}}%
-          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.expectedReturn * 100 | number:2 | virtual_change}}%</span>
+          <div class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.expectedReturn * 100 | number:2 | virtual_change}}%</div>
         </div>
 
         <div id="description">
-          <i class="fa fa-info-circle"></i>
-          Lợi nhuận kỳ vọng của danh mục sau một năm là {{indicator.expectedReturn * 100 | number:2}}%.
+          <div ng-show="!is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Lợi nhuận một năm gần nhất của cơ cấu danh mục này là {{indicator.expectedReturn * 100 | number:2}}%.
+          </div>
+          <div ng-show="is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Lợi nhuận một năm gần nhất của cơ cấu danh mục này là {{indicator.expectedReturn * 100 + sim_indicator.expectedReturn * 100 | number:2}}%.
+          </div>
         </div>
       </div>
 
       <div class="stat col-md-6" id="stat-no-chart">
-        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options"></gauge-chart>
+        <gauge-chart height="options.height" value="indicator.beta" options="gauge_options_beta"></gauge-chart>
         <div class="center-indicator">
           <div class="stat-name">
-            Rủi ro danh mục <small>(Beta)</small>
+            Rủi ro danh mục <br>
+            <!-- <small>(Beta)</small> -->
           </div>
 
         <div class="stat-number">
           {{indicator.beta | number:3}}
-          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.beta | number:3 | virtual_change}}</span>
+          <div class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.beta | number:3 | virtual_change}}</div>
           <div id="description">
-            <i class="fa fa-info-circle"></i>
-            Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
+            <div ng-show="!is_simulated">
+              <i class="fa fa-info-circle"></i>
+              Danh mục của bạn biến động {{indicator.beta * 100 | number:1}}% so với thị trường.
+            </div>
+            <div ng-show="is_simulated">
+              <i class="fa fa-info-circle"></i>
+              Danh mục của bạn biến động {{indicator.beta * 100 + sim_indicator.beta * 100 | number:1}}% so với thị trường.
+            </div>
+
           </div>
         </div>
 
       </div>
+      </div>
     </div>
 
+    <!-- Value at risk and Max Drawdown -->
     <div class="col-md-12 underline">
       <div class="stat col-md-6" id="stat-no-chart">
         <div class="stat-name">
           Giá trị chịu rủi ro <br>
-          <small>(Value at risk)</small>
+          <!-- <small>(Value at risk)</small> -->
         </div>
 
         <div class="stat-number">
-          {{indicator.valueAtRisk * 1000 | number:0}} đ
-          <span class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.valueAtRisk * 1000 | number:0 | virtual_change}} đ</span>
+          {{indicator.valueAtRisk * 1000 | number:0}}đ
+          <div class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.valueAtRisk * 1000 | number:0 | virtual_change}}đ</div>
         </div>
 
         <div id="description">
-          <i class="fa fa-info-circle"></i>
-          Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
+          <div ng-show="!is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
+          </div>
+          <div ng-show="is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn có khả năng lỗ {{indicator.valueAtRisk * 1000 + sim_indicator.valueAtRisk * 1000 | number:0}}đ trong một phiên giao dịch.
+          </div>
         </div>
       </div>
 
       <div class="stat col-md-6" id="stat-no-chart">
         <div class="stat-name">
           Khoản lỗ lớn nhất <br>
-          <small>(Max drawdown)</small>
+          <!-- <small>(Max drawdown)</small> -->
         </div>
 
         <div class="stat-number">
-          {{indicator.maxDrawDown * 1000 | number:0}} đ
-          <span class="simulate-indicator">{{sim_indicator.maxDrawDown * 1000 | number:0 | virtual_change}} đ</span>
+          {{indicator.maxDrawDown * 1000 | number:0}}đ
+          <div class="simulate-indicator" ng-show="is_simulated">{{sim_indicator.maxDrawDown * 1000 | number:0 | virtual_change}}đ</div>
         </div>
 
         <div id="description">
-          <i class="fa fa-info-circle"></i>
-          Danh mục của bạn lỗ tối đa {{indicator.maxDrawDown * 1000 | number:0}}đ trong một năm.
+          <div ng-show="!is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn có khả năng lỗ tối đa {{indicator.maxDrawDown * 1000 | number:0}}đ trong một năm.
+          </div>
+          <div ng-show="is_simulated">
+            <i class="fa fa-info-circle"></i>
+            Danh mục của bạn có khả năng lỗ tối đa {{indicator.maxDrawDown * 1000 + sim_indicator.maxDrawDown * 1000 | number:0}}đ trong một năm.
+          </div>
+
         </div>
       </div>
     </div>
-  </div>

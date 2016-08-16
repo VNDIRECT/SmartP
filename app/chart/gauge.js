@@ -9,9 +9,9 @@ function gauge_chart(container, configuration) {
 
         pointerWidth                : 10,
         pointerTailLength           : 5,
-        pointerHeadLengthPercent    : 0.9,
+        pointerHeadLengthPercent    : 0.8,
 
-        minValue                    : -1,
+        minValue                    : 0,
         maxValue                    : 10,
 
         minAngle                    : -90,
@@ -23,7 +23,7 @@ function gauge_chart(container, configuration) {
         labelFormat                 : d3.format(',g'),
         labelInset                  : 10,
 
-        arcColorFn                  : d3.interpolateHsl(d3.rgb('#e8e2ca'), d3.rgb('#3e6c0a'))
+        arcColorFn                  : d3.interpolateHsl(d3.rgb('#8BC34A'), d3.rgb('#ef5350'))
     };
     var range = undefined;
     var r = undefined;
