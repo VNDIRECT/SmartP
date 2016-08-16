@@ -193,12 +193,18 @@ h3.title-ratio{
 }
 
 #description {
-  color: #B5B6B8;
+  color: #BDBDBD;
   font-size: 14px;
   font-weight: normal;
-  text-align: left;
 }
 
 span.simulate-indicator {
   font-size: 18px;
+}
+
+#stat-no-chart {
+  text-align: center;
+}
+#stat-no-chart small {
+  color: #BDBDBD;
 }
