@@ -6,7 +6,8 @@ angular.module('myApp.engineP', [])
 
     // var SMARTP_API_URL = 'https://script.google.com/macros/s/AKfycbweSsf8cPPk__HDZiWxszJ2HdV6s3zJU8WKEErqm41TT3CeI9k/exec';
 
-    var SMARTP_API_URL = 'https://engine-portfolio-2017.appspot.com/enginep';
+    var SMARTP_API_URL = 'https://engine-portfolio-2017.appspot.com';
+    // var SMARTP_API_URL = 'http://localhost:8081';
 
     /**
     Yet another version of API which use angular $http provder
@@ -44,7 +45,7 @@ angular.module('myApp.engineP', [])
             {risk: 0.9, expectedReturn: -1.2}
             */
             compute: function(input, callback, errorCallback) {
-                var url = SMARTP_API_URL + '?' + _build_engineP_params(input);
+                var url = SMARTP_API_URL + '/enginep?' + _build_engineP_params(input);
                 console.log('Start computing view 1...', url);
                 $http({
                   method: 'GET',
