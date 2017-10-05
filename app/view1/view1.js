@@ -286,6 +286,7 @@ angular.module('myApp.view1', ['ngRoute'])
     function compute_smartP() {
         $scope.is_loading = true;
         // reset_indicator_to_default();
+        console.log('Startin computing SmartP');
         engineP.compute(
             {
                 portfolio: $scope.portfolio.get_json(),
@@ -300,6 +301,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     /**
                     Compute the virtual indicator and then diff
                     */
+                    console.log('Computing virtual indicator');
                     engineP.compute(
                         {
                             portfolio: $scope.portfolio.get_virtual_json(),

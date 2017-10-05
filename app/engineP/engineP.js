@@ -6,7 +6,7 @@ angular.module('myApp.engineP', [])
 
     // var SMARTP_API_URL = 'https://script.google.com/macros/s/AKfycbweSsf8cPPk__HDZiWxszJ2HdV6s3zJU8WKEErqm41TT3CeI9k/exec';
 
-    var SMARTP_API_URL = 'http://192.168.1.23:5000';
+    var SMARTP_API_URL = 'https://engine-portfolio-2017.appspot.com/enginep';
 
     /**
     Yet another version of API which use angular $http provder
@@ -58,7 +58,7 @@ angular.module('myApp.engineP', [])
 
             optimize: function(input, callback, errorCallback) {
                 var url = SMARTP_API_URL + '/markowitz?' + _build_engineP_params(input);
-                console.log('Start computing view 1...', url);
+                console.log('Start optimize view 1...', url);
                 $http({
                   method: 'GET',
                   url: url
