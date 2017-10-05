@@ -4,16 +4,16 @@
 This view requires a highchart
 */
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.smartp', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
+  $routeProvider.when('/smartp', {
+    templateUrl: 'smartp/smartp.html',
+    controller: 'SmartPCtrl'
   });
 }])
 
-.controller('View1Ctrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
+.controller('SmartPCtrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
 
     $scope.is_logged_in = false;
     $scope.is_loading = false;
