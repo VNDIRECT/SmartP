@@ -1,6 +1,6 @@
 <div class="container smartP">
 <!-- HEADER -->
-  <div class="page-header title col-md-12">
+  <div class="page-header title col-md-12" ng-show="fullVersion">
     <div class="col-md-6">
       <h2>
         Smart-P
@@ -45,7 +45,7 @@
   </div>
 
 <!-- PORTFOLIO DETAILS -->
-  <div class="col-md-6">
+  <div class="col-md-6" ng-show="fullVersion">
     <h3>Danh mục đầu tư</h3>
     <select class="form-control" ng-model="selectedP" ng-options="p.id as p.name for p in portfolio_list"></select>
 
@@ -168,7 +168,7 @@
   </div>
 
 <!-- RATIOS -->
-  <div class="col-md-6">
+  <div ng-class="{'col-md-12': embeddedVersion, 'col-md-6': fullVersion, 'embedded': embeddedVersion}">
     <h3 class="title-ratio">
       Kết quả
       <i class="fa fa-spinner fa-spin fa-fw" ng-show="is_loading"></i>

@@ -13,7 +13,24 @@ angular.module('myApp.smartp', ['ngRoute'])
   });
 }])
 
-.controller('SmartPCtrl', ['$scope', 'engineP', 'tradeapi', function($scope, engineP, tradeapi) {
+.controller('SmartPCtrl', ['$scope', '$routeParams', 'engineP', 'tradeapi',
+                    function($scope, $routeParams, engineP, tradeapi) {
+    function setVersion() {
+        var version = 'full';
+        if ($routeParams.version) {
+            version = $routeParams.version;
+        }
+        if (version == 'full'){
+            $scope.fullVersion = true;
+        }
+        else if (version == 'embedded'){
+            $scope.embeddedVersion = true;
+        }
+        console.log('Rendering version', version);
+        return version;
+    }
+
+    setVersion();
 
     $scope.is_logged_in = false;
     $scope.is_loading = false;

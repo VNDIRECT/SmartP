@@ -220,3 +220,8 @@ div.simulate-indicator {
 #stat-no-chart small {
   color: #BDBDBD;
 }
+
+.embedded {
+  background-color: #222;
+  color: white;
+}
