@@ -32,6 +32,8 @@ angular.module('myApp.smartp', ['ngRoute'])
 
     setVersion();
 
+
+
     $scope.is_logged_in = false;
     $scope.is_loading = false;
     $scope.is_simulated = false;
@@ -159,13 +161,15 @@ angular.module('myApp.smartp', ['ngRoute'])
         $scope.selectedP = $scope.portfolio_list[0].id;
     }
 
-    init_portfolio_list();
+    if($scope.fullVersion) {
+        init_portfolio_list();
+        $scope.$watch('selectedP', function() {
+            console.log('Update select', $scope.selectedP);
+            $scope.portfolio = portfolio_store.get($scope.selectedP);
+            compute_smartP();
+        });
+    }
 
-    $scope.$watch('selectedP', function() {
-        console.log('Update select', $scope.selectedP);
-        $scope.portfolio = portfolio_store.get($scope.selectedP);
-        compute_smartP();
-    });
 
     /**
     Handle list of portfolio logic
@@ -198,9 +202,18 @@ angular.module('myApp.smartp', ['ngRoute'])
             }
         }
     }
-
-    var portfolio_store = create_portfolio_store($scope.portfolio_list);
-    $scope.portfolio = portfolio_store.get($scope.selectedP);
+    if($scope.fullVersion) {
+        var portfolio_store = create_portfolio_store($scope.portfolio_list);
+        $scope.portfolio = portfolio_store.get($scope.selectedP);
+    }
+    if($scope.embeddedVersion) {
+        $scope.portfolio = create_portfolio();
+        var symbols = $routeParams.symbols.split(',');
+        var quantities = $routeParams.quantities.split(',');
+        for(var i = 0; i < symbols.length; i++) {
+            $scope.portfolio.add(symbols[i], quantities[i], 0);
+        }
+    }
 
     $scope.add_symbol = function() {
         // TODO: move add_symbol into a function itself?
