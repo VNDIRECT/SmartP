@@ -336,12 +336,19 @@ angular.module('myApp.smartp', ['ngRoute'])
                 console.log('Optimize process has been done with result: ', result);
 
                 setTimeout(function() {
-                    // $scope.indicator = result;
+                    // indexing result by symbol
+                    var optimal = {}
+                    for(var i = 0; i < result['data'].length; i++){
+                        var entry = result['data'][i];
+                        var symbol = entry['symbol'];
+                        optimal[symbol] = entry;
+                    }
+
                     $scope.$apply(function() {
                         for(var i = 0; i < $scope.portfolio.data.length; i++) {
                             var entry = $scope.portfolio.data[i];
-                            entry.percent = result[entry['symbol']].ratio;
-                            entry.best_quantity = result[entry['symbol']].quantity;
+                            entry.percent = optimal[entry['symbol']].ratio;
+                            entry.best_quantity = optimal[entry['symbol']].quantity;
                         }
                         $scope.is_loading = false;
                     })
